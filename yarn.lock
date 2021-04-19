@@ -6888,6 +6888,15 @@
     "xstate" "^4.9.1"
     "yoga-layout-prebuilt" "^1.9.6"
 
+"gatsby-remark-embed-video@^3.1.1":
+  "integrity" "sha512-icqxETtK/WzP6yAwqxlide4UuBY5V6Q6uOYNSdN7d4iLyMxncScmAZFHh0n+NeYWM+lK2nUD9zU0r3v0q5WOhA=="
+  "resolved" "https://registry.npmjs.org/gatsby-remark-embed-video/-/gatsby-remark-embed-video-3.1.1.tgz"
+  "version" "3.1.1"
+  dependencies:
+    "get-video-id" "^3.1.9"
+    "remark-burger" "^1.0.1"
+    "unist-util-visit" "^2.0.3"
+
 "gatsby-remark-images@^3.2.6":
   "integrity" "sha512-02lUP2CK6ftlO8L/TDowgdUiaQikC7w7sL+suBXoeTvxWBafG0KUkPQ+0n0Kcqbj62e4vcphGFHxEWoAAmsbIg=="
   "resolved" "https://registry.npmjs.org/gatsby-remark-images/-/gatsby-remark-images-3.7.1.tgz"
@@ -7216,6 +7225,11 @@
   dependencies:
     "npm-conf" "^1.1.0"
 
+"get-src@^1.0.1":
+  "integrity" "sha1-yhHb5Kk8fzqoXOyV/LCy36qVOe4="
+  "resolved" "https://registry.npmjs.org/get-src/-/get-src-1.0.1.tgz"
+  "version" "1.0.1"
+
 "get-stdin@^4.0.1":
   "integrity" "sha1-uWjGsKBDhDJJAui/Gl3zJXmkUP4="
   "resolved" "https://registry.npmjs.org/get-stdin/-/get-stdin-4.0.1.tgz"
@@ -7264,6 +7278,13 @@
   "integrity" "sha1-3BXKHGcjh8p2vTesCjlbogQqLCg="
   "resolved" "https://registry.npmjs.org/get-value/-/get-value-2.0.6.tgz"
   "version" "2.0.6"
+
+"get-video-id@^3.1.9":
+  "integrity" "sha512-58JnnJD9uRh1pviNaP3lOMjGawYacnjUSpUqQorRB/GiMl+h4vnNye45mGVvSZhKNyq59I8OfyqwrGmvScb9fQ=="
+  "resolved" "https://registry.npmjs.org/get-video-id/-/get-video-id-3.2.0.tgz"
+  "version" "3.2.0"
+  dependencies:
+    "get-src" "^1.0.1"
 
 "getpass@^0.1.1":
   "integrity" "sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo="
@@ -12699,6 +12720,11 @@
   dependencies:
     "jsesc" "~0.5.0"
 
+"remark-burger@^1.0.1":
+  "integrity" "sha512-F91SyEzat4hBkWsWElHIvMcCQuWoSeZXTuR4DmLvhUIjYkzzVLaX6GRxhkiDrZb/9asvTrYzwEr9HvxN1tqs9Q=="
+  "resolved" "https://registry.npmjs.org/remark-burger/-/remark-burger-1.0.1.tgz"
+  "version" "1.0.1"
+
 "remark-mdx@^2.0.0-next.4":
   "integrity" "sha512-mjP0yo6BgjYrx5a+gKWYRFWbGnRiWi4Fdf17xGCr9VkSMnG4Dyo06spqbaLfHwl0KkQ/RQZlR2sn1mKnYduJdw=="
   "resolved" "https://registry.npmjs.org/remark-mdx/-/remark-mdx-2.0.0-next.8.tgz"
@@ -15155,7 +15181,7 @@
   dependencies:
     "unist-util-visit-parents" "^2.0.0"
 
-"unist-util-visit@^2.0.0", "unist-util-visit@^2.0.2":
+"unist-util-visit@^2.0.0", "unist-util-visit@^2.0.2", "unist-util-visit@^2.0.3":
   "integrity" "sha512-iJ4/RczbJMkD0712mGktuGpm/U4By4FfDonL7N/9tATGIF4imikjOuagyMY53tnZq3NP6BcmlrHhEKAfGWjh7Q=="
   "resolved" "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-2.0.3.tgz"
   "version" "2.0.3"

@@ -193,9 +193,10 @@ class Scene extends React.Component {
     this.mount.appendChild(this.renderer.domElement)
 
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ffff })
     const cube = new THREE.Mesh(geometry, material)
     scene.add(cube)
+    cube.position.x = 2;
 
     this.camera.position.z = 5
 
