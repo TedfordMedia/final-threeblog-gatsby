@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Temporal Geometry`,
-    titleTemplate: `%s | Temporal Geometry`,
+    title: `Tedford Media`,
+    titleTemplate: `%s | Tedford Media`,
     author: `Stefan Devai`,
     description: `Stefan Devai's blog about History and programming.`,
     siteUrl: `https://stefandevai.me`,

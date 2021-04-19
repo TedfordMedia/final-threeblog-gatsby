@@ -2,6 +2,7 @@ import React from "react"
 import * as THREE from "three"
 import sceneStyles from "./styles/scene.module.sass"
 
+var cube;
 class Gear {
   constructor(props) {
     this.clock = new THREE.Clock()
@@ -81,6 +82,16 @@ class Scene extends React.Component {
     const numberOfGears = 3
     let gears = new Array(numberOfGears)
 
+    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+    scene.add( light );
+    const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    scene.add( directionalLight );
+
     gears[0] = new Gear({
       radius: 10,
       position: {x: -4, y: -0.5},
@@ -111,6 +122,9 @@ class Scene extends React.Component {
     this.camera.position.z = 15
 
     this.animate = function () {
+      var SPEED = 0.01;
+      cube.rotation.x -= SPEED * 2;
+      cube.rotation.y -= SPEED * .2;
       gears.forEach(gear => gear.animate())
       this.renderer.render(scene, this.camera)
       requestAnimationFrame(this.animate.bind(this))
@@ -144,6 +158,8 @@ class Scene extends React.Component {
   }
 
   render() {
+
+
     const classes = this.state.hasLoaded === false ? [sceneStyles.webglContainer]
                                                    : [sceneStyles.webglContainer, sceneStyles.shown]
     return (

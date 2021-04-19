@@ -1,0 +1,83 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 140 45.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path-2);
+      }
+
+      .cls-4 {
+        fill: #589bce;
+      }
+
+      .cls-5 {
+        fill: #dc9627;
+      }
+
+      .cls-6 {
+        fill: #ad1920;
+      }
+
+      .cls-7 {
+        fill: #b1d049;
+      }
+
+      .cls-11, .cls-8 {
+        fill: #683386;
+      }
+
+      .cls-9 {
+        fill: #dfbc44;
+      }
+
+      .cls-10, .cls-11 {
+        font-size: 21.63px;
+        font-family: OpenSans-Bold, Open Sans;
+        font-weight: 700;
+      }
+
+      .cls-10 {
+        fill: #589bcd;
+      }
+    </style>
+    <clipPath id="clip-path" transform="translate(-122.51 5.55)">
+      <rect class="cls-1" x="122.51" y="-5.55" width="142.39" height="45.47"/>
+    </clipPath>
+    <clipPath id="clip-path-2" transform="translate(-122.51 5.55)">
+      <rect class="cls-1" x="122.51" y="-4.3" width="38.92" height="38.86"/>
+    </clipPath>
+  </defs>
+  <g id="Artwork_65" data-name="Artwork 65">
+    <g class="cls-2">
+      <g class="cls-3">
+        <path class="cls-4" d="M157.36,6.24,159,5.65A19.46,19.46,0,0,0,143.44-4.3v1.7a17.78,17.78,0,0,1,13.92,8.84" transform="translate(-122.51 5.55)"/>
+        <path class="cls-5" d="M143.44,32.8v1.7a19.48,19.48,0,0,0,15.5-9.87l-1.4-1a17.8,17.8,0,0,1-14.1,9.15" transform="translate(-122.51 5.55)"/>
+        <path class="cls-6" d="M124.8,19.67l-1.6.58A19.45,19.45,0,0,0,142,34.56V32.87a17.8,17.8,0,0,1-17.17-13.2" transform="translate(-122.51 5.55)"/>
+        <path class="cls-7" d="M159.73,15.1a17.52,17.52,0,0,1-1.53,7.21l1.42,1a19.45,19.45,0,0,0,0-16.32l-1.6.58a17.64,17.64,0,0,1,1.68,7.54" transform="translate(-122.51 5.55)"/>
+        <path class="cls-8" d="M124.2,15.1a17.69,17.69,0,0,1,4.41-11.7l-1.4-1a19.4,19.4,0,0,0-4.7,12.69,19.67,19.67,0,0,0,.35,3.7l1.61-.59a17.72,17.72,0,0,1-.27-3.11" transform="translate(-122.51 5.55)"/>
+        <path class="cls-7" d="M157.7,15.1a15.66,15.66,0,0,1-3.48,9.84l1.09,1.29a17.38,17.38,0,0,0,3.92-13.18h-1.67a15.34,15.34,0,0,1,.14,2" transform="translate(-122.51 5.55)"/>
+        <path class="cls-4" d="M157.29,11.57H159A17.45,17.45,0,0,0,147.18-1.49L146.75.12a15.77,15.77,0,0,1,10.54,11.45" transform="translate(-122.51 5.55)"/>
+        <path class="cls-5" d="M142,30.83a16.07,16.07,0,0,1-3.35-.36l-.43,1.6a17.33,17.33,0,0,0,16.12-4.73l-1.08-1.28A15.67,15.67,0,0,1,142,30.83" transform="translate(-122.51 5.55)"/>
+        <path class="cls-8" d="M133.13,2.1,132.06.82a17.45,17.45,0,0,0-7.12,10.75h1.7a15.76,15.76,0,0,1,6.49-9.47" transform="translate(-122.51 5.55)"/>
+        <path class="cls-6" d="M126.24,15.1a15.34,15.34,0,0,1,.14-2H124.7a17.4,17.4,0,0,0,12.06,18.64l.43-1.6a15.77,15.77,0,0,1-11-15" transform="translate(-122.51 5.55)"/>
+        <path class="cls-6" d="M141.54,19.79l-13-7.37A13.78,13.78,0,0,0,132.44,25Z" transform="translate(-122.51 5.55)"/>
+        <path class="cls-8" d="M137.7,17.16V2.06a13.73,13.73,0,0,0-9.1,10Z" transform="translate(-122.51 5.55)"/>
+        <path class="cls-5" d="M145.85,17.79l-13.1,7.47a13.77,13.77,0,0,0,13.09,3Z" transform="translate(-122.51 5.55)"/>
+        <path class="cls-4" d="M138.1,12.4l13.05-7.5a13.77,13.77,0,0,0-13.05-3Z" transform="translate(-122.51 5.55)"/>
+        <path class="cls-9" d="M146.25,13.07V28.14a13.77,13.77,0,0,0,9.09-9.91Z" transform="translate(-122.51 5.55)"/>
+        <path class="cls-7" d="M142.38,10.4l13,7.42a14.34,14.34,0,0,0,.27-2.72,13.68,13.68,0,0,0-4.24-9.91Z" transform="translate(-122.51 5.55)"/>
+      </g>
+      <g class="cls-2">
+        <text class="cls-10" transform="translate(39.98 18.54)">TEDFORD</text>
+        <text class="cls-11" transform="translate(39.98 39.13)">MEDIA</text>
+      </g>
+    </g>
+  </g>
+</svg>

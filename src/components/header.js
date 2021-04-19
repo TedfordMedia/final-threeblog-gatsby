@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import headerStyles from "./styles/header.module.sass"
 import "./styles/header-logo-animation.sass"
-import StefanDevaiLogo from "../../static/assets/svg/logo-stefan-devai.svg"
+import StefanDevaiLogo from "../../static/assets/svg/logotedmedia3.svg"
 
 const MenuItem = props => (
   <li className={headerStyles.menuItem}>
