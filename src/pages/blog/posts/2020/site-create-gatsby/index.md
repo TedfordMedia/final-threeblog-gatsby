@@ -2,6 +2,8 @@
 title: Create React Gatsby Site
 date: "2021-04-16T22:40:32.169Z"
 videoSourceURL: https://www.youtube.com/embed/dQw4w9WgXcQ
+featuredImage: "./gatsbyblogsimple.png"
+featuredImageCaption: "Amethyst Waters gameplay."
 videoTitle: "Gatsby is Never Gonna Give You Up"
 description: How.. to create a basic Gatsby React Blog Site.  This site is made using Gatsby!
 ---
