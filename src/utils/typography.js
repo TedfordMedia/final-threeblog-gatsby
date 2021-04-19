@@ -3,8 +3,8 @@ import Typography from "typography"
 import { MOBILE_MEDIA_QUERY } from "typography-breakpoint-constants"
 
 const typography = new Typography({
-  headerFontFamily: ['Bodoni Moda', 'serif'],
-  bodyFontFamily: ['Bodoni Moda', 'serif'],
+  headerFontFamily: ['Nunito', 'serif'],
+  bodyFontFamily: ['Nunito', 'serif'],
   baseFontSize: "18px",
   baseLineHeight: 1.44,
   scaleRatio: 2.15,
