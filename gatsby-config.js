@@ -2,9 +2,9 @@ module.exports = {
   siteMetadata: {
     title: `Tedford Media`,
     titleTemplate: `%s | Tedford Media`,
-    author: `Stefan Devai`,
-    description: `Stefan Devai's blog about History and programming.`,
-    siteUrl: `https://stefandevai.me`,
+    author: `Ted@TedfordMedia`,
+    description: `Ted's blog about History and programming.`,
+    siteUrl: `https://tedfordmedia.com`,
     banner: `/assets/images/banner.jpg`,
   },
 
