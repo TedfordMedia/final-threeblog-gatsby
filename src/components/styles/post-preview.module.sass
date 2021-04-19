@@ -1,0 +1,39 @@
+@import "src/styles/definitions"
+
+.post-preview
+  padding: base-height(1) base-width(0.4)
+  border-bottom: 1px solid $color-extra-light-grey
+
+  @media (prefers-color-scheme: dark)
+    border-bottom: 1px solid $dark-color-detail
+
+  a
+    color: inherit
+
+  h2
+    margin-bottom: 0
+
+  p
+    margin-top: base-height(0.5)
+
+  h3:hover ~ p
+    color: $color-grey
+
+  p:hover
+    color: $color-grey
+
+.language-tag
+  background-color: $color-black
+
+  @media (prefers-color-scheme: dark)
+    background-color: $dark-color-p
+    color: $color-black
+
+.date
+  color: $color-grey
+  font-size: $font-small
+  font-style: italic
+
+  @media (prefers-color-scheme: dark)
+    color: $dark-color-secondary
+

@@ -1,0 +1,35 @@
+@import "src/styles/definitions"
+
+.hero
+  position: relative
+  //height: calc(100vh - 57px)
+  height: 70vh
+
+.scene-placeholder
+  background-color: $color-black
+  z-index: 1
+  width: 100%
+  height: 100%
+  position: absolute !important
+
+.content
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  background-color: $color-black
+
+  p
+    z-index: 2
+    text-align: center
+    color: $color-white
+
+  h1
+    z-index: 2
+    font-size: $font-extra-big
+    text-align: center
+    margin-top: 0
+    color: $color-white
+    margin-bottom: base-height(1.5)
+

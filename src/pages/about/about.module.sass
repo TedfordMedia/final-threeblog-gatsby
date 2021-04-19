@@ -1,0 +1,94 @@
+@import "../../styles/definitions.sass"
+
+.grid
+  @media (min-width: 672px)
+    display: grid
+  grid-template-columns: repeat(10, 1fr)
+  grid-template-rows: repeat(11, base-height(2.5)) auto repeat(3, base-height(2.5))
+
+.image
+  @media (min-width: 672px)
+    opacity: 0.8
+  grid-column: 1 / span 4
+  grid-row: 1 / span 8
+
+.text-wrapper
+  height: 100%
+  z-index: 1
+  grid-column: 4 / span 7
+  grid-row: 2 / span 11
+  padding: 0
+  background-color: rgba(255, 255, 255, 0.7)
+
+  @media (prefers-color-scheme: dark)
+    background-color: rgba(34, 34, 34, 0.9)
+
+  @media (min-width: 672px)
+    padding: 1rem 2rem
+    p:last-child
+      margin: 0
+
+.text
+  padding-top: base-height(2)
+  @media (min-width: 672px)
+    padding-top: base-height(1.5)
+
+.line-top
+  @media (min-width: 672px)
+    border-top: 1px solid $color-light-grey
+
+    @media (prefers-color-scheme: dark)
+      border-top: 1px solid $dark-color-detail
+  grid-column: 8 / span 1
+  grid-row: 1 / span 1
+
+.line-bottom
+  border-top: 1px solid $color-light-grey
+  grid-column: 1 / span 3
+  grid-row: 10 / span 1
+
+  @media (max-width: 672px)
+    display: none
+
+  @media (prefers-color-scheme: dark)
+    border-top: 1px solid $dark-color-detail
+  
+.rectangle
+  grid-column: 5 / span 1
+  grid-row: 1 / span 1
+  background-color: $color-accent-light
+  @media (max-width: 672px)
+    display: none
+
+.social-icons
+  height: 45px
+  @media (max-width: 672px)
+    margin-top: base-height(2)
+    margin-bottom: base-height(1)
+
+  grid-column: 3 / -3
+  grid-row: 14 / span 1
+  display: flex
+  justify-content: space-between
+
+  a
+    height: 100%
+    width: 45px
+
+  svg
+    height: 100%
+    width: auto
+
+    rect
+      transition: fill 0.1s ease
+
+      @media (prefers-color-scheme: dark)
+        fill: $dark-color-heading
+
+    path
+      @media (prefers-color-scheme: dark)
+        fill: $dark-color-bg
+
+    &:hover rect
+      fill: $color-accent 
+
