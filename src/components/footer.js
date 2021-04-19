@@ -4,13 +4,11 @@ import "./styles/footer.module.sass"
 const Footer = props => {
   return(
     <footer>
-        <span>This website is <a href="https://github.com/stefandevai/stefandevai.github.io/" target="_blank" rel="noopener noreferrer">open source</a>!</span> 
+        <span>This website is made with <a href="https://gatsbyjs.com" target="_blank" rel="noopener noreferrer">Gatsby JS</a></span> 
         &nbsp;—&nbsp;
         <span>
-          <a href="https://github.com/stefandevai" target="_blank" rel="noopener noreferrer">github</a>&nbsp;·&nbsp;
-          <a href="https://instagram.com/stedevai" target="_blank" rel="noopener noreferrer">instagram</a>&nbsp;·&nbsp;
-          <a href="mailto:stefandevai@posteo.me" target="_blank" rel="noopener noreferrer">email</a>&nbsp;·&nbsp;
-          <a href="/rss.xml" target="_blank" rel="noopener noreferrer">rss</a>
+          <a href="https://github.com/tedfordmedia" target="_blank" rel="noopener noreferrer">github</a>&nbsp;·&nbsp; 
+          <a href="mailto:ted@tedfordmedia.com" target="_blank" rel="noopener noreferrer">email</a>&nbsp;·&nbsp; 
         </span>
     </footer>
   )
