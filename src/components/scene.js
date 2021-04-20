@@ -134,14 +134,13 @@ class Scene extends React.Component {
       zRotation: -0.005,
     })
 
-    gears.forEach(gear => scene.add(gear.geometry))
+  
     this.camera.position.z = 15
 
     this.animate = function () {
       var SPEED = 0.01;
       cube.rotation.x -= SPEED * 2;
-      cube.rotation.y -= SPEED * .2;
-      gears.forEach(gear => gear.animate())
+      cube.rotation.y -= SPEED * .2; 
       this.renderer.render(scene, this.camera)
       requestAnimationFrame(this.animate.bind(this))
     }

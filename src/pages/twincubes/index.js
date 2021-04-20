@@ -72,7 +72,7 @@ export default () => {
 
   return (
     <>
-      <h1>Hello every2one!</h1>
+      <h1>Hello everyone!</h1>
       {isBrowser && (
         <Canvas
           camera={{ position: [0, 0, 5] }}
