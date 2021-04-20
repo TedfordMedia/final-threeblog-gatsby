@@ -1,19 +1,17 @@
 ---
-title: React-three-fiber
+title: Using React-Three-Fiber
 date: "2021-04-17T21:40:00.169Z" 
 featuredImage: r3ff.png
-description: To get started with xxx you will have to install the package
+description: Getting started with Using React-Three-Fiber
 tags: ["three.js", "Gatsby", "React"]
 ---
 
-Using React-Three-Fiber
-
 React-Three-Fiber or R3F is a powerful React renderer for three.js scenes, both for the web and with React Native.
+Go to your preferred terminal, navigate to a folder you want for your repository, then:
 
-
-To get started, you will have to create a new app, the easiest way is via the terminal, navigate to a folder you want for your repository, then:
+```bash
 gatsby new .... finish this later as havent really used it yet
-
+```
 
 
 

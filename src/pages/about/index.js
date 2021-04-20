@@ -42,7 +42,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query {
-    fileName: file(relativePath: { eq: "about/me.jpg" }) {
+    fileName: file(relativePath: { eq: "about/profile-pic.png" }) {
       childImageSharp {
         fluid(maxWidth: 800) {
           ...GatsbyImageSharpFluid
