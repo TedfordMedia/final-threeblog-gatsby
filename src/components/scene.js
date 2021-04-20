@@ -8,15 +8,13 @@ var cube;
 var model;
 class Gear {
   constructor(props) {
-    this.clock = new THREE.Clock()
-    this.zRotation = props.zRotation
-
+ 
+    this.zRotation = props.zRotation 
     this.pausedDuration = props.pausedDuration
     this.pausedDelay = props.pausedDuration
     this.movingDuration = props.movingDuration
     this.movingDelay = props.movingDuration
-    this.isPaused = false
-
+    this.isPaused = false 
     this.create(props)
   }
 
@@ -72,8 +70,11 @@ class Scene extends React.Component {
   }
 
   componentDidMount() {
- 
+    this.animationClock = new THREE.Clock();
+    this.clock = new THREE.Clock()
     const scene = new THREE.Scene();
+    this.mixer = false;   
+    this.mixers = [];
     this.scene = scene;
     var xthis = this;
     this.gui = new GUI( { width: 310 } );
@@ -110,7 +111,7 @@ class Scene extends React.Component {
    // this.camera = new THREE.PerspectiveCamera( 75, this.mount.offsetWidth/this.mount.offsetHeight, 0.1, 1000 )
     // camera
     this.camera = new THREE.PerspectiveCamera( 45, this.mount.offsetWidth / this.mount.offsetHeight, 1, 100 );
-    this.camera.position.set( - 1, 2, 3 );
+    this.camera.position.set( - .7, .7, 2.6 );
 
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -159,6 +160,37 @@ class Scene extends React.Component {
       // called when the resource is loaded
       function ( gltf ) { 
 
+        var mixer  = new THREE.AnimationMixer(gltf.scene);
+      //   this.mixers.push(mixer);
+
+      //   let xaction =  mixer.clipAction( gltf.animations[ 0 ] );
+      //  // this.actions.push(xaction);
+      //   xaction.clampWhenFinished = true;  
+      //   xaction.setLoop( THREE.LoopOnce ,1);
+
+
+
+      //   // mixer = new THREE.AnimationMixer( gltf.scene );
+      //   // var action = mixer.clipAction( gltf.animations[ 0 ] );
+      //   xaction.play();
+
+
+
+
+        // var mixer = new THREE.AnimationMixer( mesh );
+        // mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
+        // mixers.push( mixer );
+
+
+
+
+  
+      //   gltf.animations.forEach((data, i) => {
+      //     console.log(`i value: ${i} |   Name:`, data.name);
+      //   //  this.addAndPlayThisClipAnimation(gltf, data) 
+      // }); 
+
+        //this.processNodeChanges();
 
          var model = gltf.scene;
          scene.add( model );
@@ -168,6 +200,21 @@ class Scene extends React.Component {
           if ( object.isMesh ) object.castShadow = true;
 
         } );
+
+
+
+        const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
+        dirLight.position.set( 3, 2, -2 );
+        dirLight.castShadow = true;
+        dirLight.shadow.camera.top = 2;
+        dirLight.shadow.camera.bottom = - 2;
+        dirLight.shadow.camera.left = - 2;
+        dirLight.shadow.camera.right = 2;
+        dirLight.shadow.camera.near = 0.1;
+        dirLight.shadow.camera.far = 3;
+       // gltf.scene.add( dirLight );
+
+
 
         
         scene.add( gltf.scene ); 
@@ -179,9 +226,40 @@ class Scene extends React.Component {
       },
       // called when loading has errors
       function ( error ) { 
-        console.log( 'An error happened' ); 
+        console.log( 'An error happened' +JSON.stringify(error)); 
       }
     );
+
+
+
+
+
+    loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
+
+      var mesh = gltf.scene.children[ 0 ];
+
+      var s = 100000.35;
+      mesh.scale.set( s, s, s );
+      mesh.position.z = -5;
+       // mesh.position.x = 65;
+      //mesh.rotation.y =  Math.PI/1; 
+     // mesh.rotation.x =  Math.PI/1; 
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+  console.log('loadedddd')
+  var model = gltf.scene;
+  scene.add( model );
+      // var mixer = new THREE.AnimationMixer( mesh );
+      // mixer.clipAction( gltf.scene.animations[ 0 ] ).setDuration( 1 ).play();
+      // this.mixers.push( mixer );
+
+  } );
+
+
+
+
+
 
 
     // // Load a glTF resource
@@ -222,6 +300,12 @@ class Scene extends React.Component {
 
 
     this.animate = function () {
+      var mixerUpdateDelta = this.animationClock.getDelta();
+ 
+      for ( var i = 0; i < this.mixers.length; ++ i ) { 
+         this.mixers[ i ].update( mixerUpdateDelta );
+      } 
+
       var SPEED = 0.01;
       cube.rotation.x -= SPEED * 2;
       cube.position.x -= SPEED * 2;

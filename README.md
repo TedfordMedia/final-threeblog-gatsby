@@ -1,3 +1,13 @@
-npm install react-three-fiber --legacy-peer-deps
+
+<p align="center">
+  <a href="https://www.gatsbyjs.com">
+    <img alt="Gatsby" src="https://basicpageforcorsfiles.azurewebsites.net/assets/imgs/top-page/pageheader.png" width="60" />
+  </a>
+</p>
+<h1 align="center">
+  TedfordMedia Website SourceCode (OpenSource)
+</h1>
+
+Notes to be added!
 
  
