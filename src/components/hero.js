@@ -1,7 +1,7 @@
 import React from "react"
 import { Suspense, lazy } from 'preact/compat'
 import heroStyles from "./styles/hero.module.sass"
-
+console.log('heroStyles'+JSON.stringify(heroStyles))
 const Scene = lazy(() => import("./scene"))
 
 const Hero = props => {

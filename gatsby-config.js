@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = { 
   siteMetadata: {
     title: `Tedford Media`,
     titleTemplate: `%s | Tedford Media`,
@@ -9,6 +9,7 @@ module.exports = {
   },
 
   plugins: [
+    `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
