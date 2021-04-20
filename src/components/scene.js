@@ -158,7 +158,7 @@ class Scene extends React.Component {
 
     // // Load a glTF resource
     const loader = new GLTFLoader();
- 
+    var xthis = this;
     loader.load(
       // resource URL
       '/assets/models/robot6.glb',
@@ -293,25 +293,17 @@ class Scene extends React.Component {
 
  
 
- 
-
+  
+    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+    // controls.enablePan = false;
+    // controls.enableZoom = false;
+    this.controls.target.set( 0, 1, 0 );
+    this.controls.update(); 
 
 
 
     this.animate = function () {
-
-      TWEEN.update();
-      for ( var i = 0; i < this.mixers.length; ++ i ) { 
-         this.mixers[ i ].update( this.animationClock.getDelta() );
-      } 
-   
-      var SPEED = 0.00251;
-      // this.cube.rotation.x -= SPEED * .3;
-      // this.cube.position.x -= SPEED * .3;
-      // this.cube.rotation.y -= SPEED * .092; 
-      this.renderer.render(this.scene, this.camera)
-      requestAnimationFrame(this.animate.bind(this))
-
+      
       var mixerUpdateDelta = this.animationClock.getDelta();
  
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
@@ -331,13 +323,6 @@ class Scene extends React.Component {
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
   }
-  setupControls(){
-    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-    this.controls.enablePan = true;
-    this.controls.enableZoom = false;
-    this.controls.target.set( 0, 1, 0 );
-    this.controls.update(); 
-  } 
   setRobotPosition(x){ 
     x.scale.set(4,4,4)
     x.position.set(0,0,-20)
