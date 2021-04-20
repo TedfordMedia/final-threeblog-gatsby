@@ -82,10 +82,26 @@ class Scene extends React.Component {
     const numberOfGears = 3
     let gears = new Array(numberOfGears)
 
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const geometry = new THREE.BoxGeometry( 20, 20, 20 );
     const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
     cube = new THREE.Mesh( geometry, material );
+    cube.position.z = -25;
+    cube.castShadow = true;
+    cube.receiveShadow = true;
     scene.add( cube );
+
+    const planegeometry = new THREE.BoxGeometry( 200, 200 ,2);
+    const planematerial = new THREE.MeshBasicMaterial( {color: '#683286'});
+    
+    var floor = new THREE.Mesh( planegeometry, planematerial );
+    scene.add( floor );
+   
+    floor.position.y = 0.0;
+    floor.position.z = -150;
+    floor.rotation.x = - 1//Math.PI / 2;
+    floor.receiveShadow = true;
+    floor.name = 'floor'
+
 
     const light = new THREE.AmbientLight( 0x404040 ); // soft white light
     scene.add( light );

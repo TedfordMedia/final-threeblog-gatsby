@@ -1,12 +1,37 @@
 ---
 title: React-three-fiber
 date: "2021-04-17T21:40:00.169Z" 
-featuredImage: salty_egg.jpg
+featuredImage: r3ff.png
 description: To get started with xxx you will have to install the package
+tags: ["three.js", "Gatsby", "React"]
 ---
-### React-three-fiber
 
-To get started with xxx you will have to install the package:
+Using React-Three-Fiber
+
+React-Three-Fiber or R3F is a powerful React renderer for three.js scenes, both for the web and with React Native.
+
+
+To get started, you will have to create a new app, the easiest way is via the terminal, navigate to a folder you want for your repository, then:
+gatsby new .... finish this later as havent really used it yet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+install the package:
 
 ```
 npm install react-three-fiber --legacy-peer-deps
@@ -17,9 +42,7 @@ npm i nice-color-palettes --save --legacy-peer-deps
 ```
 
 Then make a page inside the Pages folder
-Oh, and here's a great quote from this Wikipedia on
-[salted duck eggs](./salty_egg.jpg).
-
+  
 here is the typescript
 ```typescript
 import * as THREE from 'three'

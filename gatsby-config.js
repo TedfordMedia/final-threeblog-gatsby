@@ -3,7 +3,7 @@ module.exports = {
     title: `Tedford Media`,
     titleTemplate: `%s | Tedford Media`,
     author: `Ted@TedfordMedia`,
-    description: `Ted's blog about History and programming.`,
+    description: `AR, WebGL, React Three Fiber`,
     siteUrl: `https://tedfordmedia.com`,
     banner: `/assets/images/banner.jpg`,
   },
