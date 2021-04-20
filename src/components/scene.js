@@ -4,6 +4,7 @@ import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
+const TWEEN = require('@tweenjs/tween.js')
 var cube;
 var model;
 class Gear {
