@@ -1,0 +1,2 @@
+canvas { outline: none; border: none; }
+If you haven't found the answer to this question yet, the answer is adding overflow: hidden;to your div/canvas containing three.js scene.
