@@ -1,51 +1,95 @@
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
-import { OrbitControls, Stars } from '@react-three/drei'
- 
-function Box(props) {
-  // This reference will give us direct access to the mesh
-  const mesh = useRef()
+import React, { useState, useRef, useEffect } from "react"
+import * as THREE from "three"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { Canvas, extend, useThree, useRender } from "react-three-fiber"
+import { useSpring, a } from "react-spring/three"
 
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
+import "./styles.css"
 
-  // Rotate mesh every frame, this is outside of React without overhead
-  useFrame(() => {
-    mesh.current.rotation.y += 0.01
+extend({ OrbitControls })
+
+const SpaceShip = () => {
+  const [model, setModel] = useState()
+
+  useEffect(() => {
+    new GLTFLoader().load("/scene.gltf", setModel)
+  })
+
+  return model ? <primitive object={model.scene} /> : null
+}
+
+const Controls = () => {
+  const orbitRef = useRef()
+  const { camera, gl } = useThree()
+
+  useRender(() => {
+    orbitRef.current.update()
   })
 
   return (
-    <mesh
-      {...props}
-      ref={mesh}
-      scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
-      onClick={(e) => setActive(!active)}
-      onPointerOver={(e) => setHover(true)}
-      onPointerOut={(e) => setHover(false)}>
-      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial metalness={0.1} attach="material" color={hovered ? '#ec407a' : '#f4511e'} />
-    </mesh>
+    <orbitControls
+      autoRotate
+      maxPolarAngle={Math.PI / 3}
+      minPolarAngle={Math.PI / 3}
+      args={[camera, gl.domElement]}
+      ref={orbitRef}
+    />
   )
 }
 
-export default function App() {
-  return (
-    <Canvas>
-      <ambientLight intensity={1} />
-      <spotLight position={[10, 10, 10]} angle={0.15} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-      <OrbitControls />
+const Plane = () => (
+  <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} receiveShadow>
+    <planeBufferGeometry attach="geometry" args={[100, 100]} />
+    <meshPhysicalMaterial attach="material" color="white" />
+  </mesh>
+)
 
-      <Stars
-        radius={100} // Radius of the inner sphere (default=100)
-        depth={50} // Depth of area where stars should fit (default=50)
-        count={5000} // Amount of stars (default=5000)
-        factor={4} // Size factor (default=4)
-        saturation={0} // Saturation 0-1 (default=0)
-        fade // Faded dots (default=false)
-      />
-    </Canvas>
+const Box = () => {
+  const [hovered, setHovered] = useState(false)
+  const [active, setActive] = useState(false)
+  const props = useSpring({
+    scale: active ? [1.5, 1.5, 1.5] : [1, 1, 1],
+    color: hovered ? "hotpink" : "gray",
+  })
+
+  return (
+    <a.mesh
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      onClick={() => setActive(!active)}
+      scale={props.scale}
+      castShadow
+    >
+      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+      <a.meshPhysicalMaterial attach="material" color={props.color} />
+    </a.mesh>
+  )
+}
+
+export default () => {
+  const isBrowser = typeof window !== "undefined"
+
+  return (
+    <>
+      <h1>Hello every2one!</h1>
+      {isBrowser && (
+        <Canvas
+          camera={{ position: [0, 0, 5] }}
+          onCreated={({ gl }) => {
+            gl.shadowMap.enabled = true
+            gl.shadowMap.type = THREE.PCFSoftShadowMap
+          }}
+        >
+          <ambientLight intensity={0.5} />
+          <spotLight position={[15, 20, 5]} penumbra={1} castShadow />
+          <fog attach="fog" args={["black", 10, 25]} />
+          <Controls />
+          {/* <Box /> */}
+          {/* <Plane /> */}
+          {/* <SpaceShip /> */}
+        </Canvas>
+      )}
+    </>
   )
 }

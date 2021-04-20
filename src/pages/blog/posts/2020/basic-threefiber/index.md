@@ -10,7 +10,10 @@ React-Three-Fiber or R3F is a powerful React renderer for three.js scenes, both 
 Go to your preferred terminal, navigate to a folder you want for your repository, then:
 
 ```bash
-gatsby new .... finish this later as havent really used it yet
+gatsby new three-website https://github.com/gatsbyjs/gatsby-starter-hello-world: creates a new Gatsby project called three-website with a minimal project skeleton;
+
+ cd three-app: changes directory to your newly create project's directory;
+npm install --save three: installs three.js npm package.
 ```
 
 
