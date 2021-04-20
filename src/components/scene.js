@@ -5,6 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
 var cube;
+var model;
 class Gear {
   constructor(props) {
     this.clock = new THREE.Clock()
@@ -74,6 +75,7 @@ class Scene extends React.Component {
  
     const scene = new THREE.Scene();
     this.scene = scene;
+    var xthis = this;
     this.gui = new GUI( { width: 310 } );
     scene.background = new THREE.Color( 0xa0a0a0 );
     scene.fog = new THREE.Fog( 0xa0a0a0, 10, 50 );
@@ -82,33 +84,28 @@ class Scene extends React.Component {
     hemiLight.position.set( 0, 20, 0 );
     scene.add( hemiLight );
 
-    const dirLight = new THREE.DirectionalLight( 0xffffff );
-    dirLight.position.set( 3, 10, 10 );
+    const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
+    dirLight.position.set( 3, 122, 122 );
     dirLight.castShadow = true;
     dirLight.shadow.camera.top = 2;
     dirLight.shadow.camera.bottom = - 2;
     dirLight.shadow.camera.left = - 2;
     dirLight.shadow.camera.right = 2;
     dirLight.shadow.camera.near = 0.1;
-    dirLight.shadow.camera.far = 40;
+    dirLight.shadow.camera.far = 250;
     scene.add( dirLight );
+    
+    this.gui.add(dirLight, 'visible').name('Light' ) ;
+    //   objects.push(mesh);
+    // });
 
-
-    // ground
-
-    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+    // ground 
+    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
     scene.add( mesh );
 
-
-
-
-
-
-
-
-
+ 
   
    // this.camera = new THREE.PerspectiveCamera( 75, this.mount.offsetWidth/this.mount.offsetHeight, 0.1, 1000 )
     // camera
@@ -117,13 +114,14 @@ class Scene extends React.Component {
 
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
-
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     window.onload = setTimeout(this.fadeScene.bind(this), 250)
 
-    scene.background = new THREE.Color(0x111111)
-
+    
+    
     const numberOfGears = 3
     let gears = new Array(numberOfGears)
 
@@ -139,64 +137,51 @@ class Scene extends React.Component {
     const planematerial = new THREE.MeshStandardMaterial( {color: '#683286'});
     
     var floor = new THREE.Mesh( planegeometry, planematerial );
-    scene.add( floor );
+    // scene.add( floor );
    
-    floor.position.y = -120;
-    floor.position.z = -250;
-    //floor.rotation.x = - 1//Math.PI / 2;
-    floor.receiveShadow = true;
-    floor.name = 'floor'
+    // floor.position.y = -120;
+    // floor.position.z = -250;
+    // //floor.rotation.x = - 1//Math.PI / 2;
+    // floor.receiveShadow = true;
+    // floor.name = 'floor'
     const folder1 = this.gui.addFolder( 'Floor' );
 
-
-    const light = new THREE.AmbientLight( 0x404040 ); // soft white light
-    scene.add( light );
-    const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    scene.add( directionalLight );
-
-    const xdirectionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    scene.add( xdirectionalLight );
-    xdirectionalLight.position.x = -20;
-    xdirectionalLight.position.y = 20;
-    var xthis = this;
-
-  
-
+    //this.gui.hide();
 
 
 
     // // Load a glTF resource
-    // const loader = new GLTFLoader();
+    const loader = new GLTFLoader();
     
-    // loader.load(
-    //   // resource URL
-    //   '/assets/models/robot6.glb',
-    //   // called when the resource is loaded
-    //   function ( gltf ) { 
+    loader.load(
+      // resource URL
+      '/assets/models/robot6.glb',
+      // called when the resource is loaded
+      function ( gltf ) { 
 
 
-    //      var model = gltf.scene;
-    //      scene.add( model );
+         var model = gltf.scene;
+         scene.add( model );
 
-    //     model.traverse( function ( object ) {
+        model.traverse( function ( object ) {
+          object.castShadow = true
+          if ( object.isMesh ) object.castShadow = true;
 
-    //       if ( object.isMesh ) object.castShadow = true;
-
-    //     } );
+        } );
 
         
-    //     scene.add( gltf.scene ); 
-    //     xthis.setRobotPosition(gltf.scene);
-    //   },
-    //   // called while loading is progressing
-    //   function ( xhr ) { 
-    //     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' ); 
-    //   },
-    //   // called when loading has errors
-    //   function ( error ) { 
-    //     console.log( 'An error happened' ); 
-    //   }
-    // );
+        scene.add( gltf.scene ); 
+       // xthis.setRobotPosition(gltf.scene);
+      },
+      // called while loading is progressing
+      function ( xhr ) { 
+        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' ); 
+      },
+      // called when loading has errors
+      function ( error ) { 
+        console.log( 'An error happened' ); 
+      }
+    );
 
 
     // // Load a glTF resource
