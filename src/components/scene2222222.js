@@ -8,6 +8,7 @@ const TWEEN = require('@tweenjs/tween.js')
 var cube;
 var customMaterial;
 var tweent;
+
 class Scene extends React.Component {
   constructor(props) {
     super(props)
@@ -140,7 +141,9 @@ class Scene extends React.Component {
       mesh.position.x = 1.2;
       mesh.rotation.y +=  -.4; 
       // mesh.rotation.x =  Math.PI/1; 
- 
+      
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       var model = gltf.scene;
       scene.add( model );
 
