@@ -3,7 +3,7 @@ import * as THREE from "three"
 import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
 var cube;
 class Gear {
   constructor(props) {
@@ -74,6 +74,7 @@ class Scene extends React.Component {
  
     const scene = new THREE.Scene();
     this.scene = scene;
+    this.gui = new GUI( { width: 310 } );
     scene.background = new THREE.Color( 0xa0a0a0 );
     scene.fog = new THREE.Fog( 0xa0a0a0, 10, 50 );
 
@@ -132,7 +133,7 @@ class Scene extends React.Component {
     cube.position.z = -25;
     cube.castShadow = true;
     cube.receiveShadow = true;
-    scene.add( cube );
+    //scene.add( cube );
 
     const planegeometry = new THREE.BoxGeometry( 200, 200 ,200);
     const planematerial = new THREE.MeshStandardMaterial( {color: '#683286'});
@@ -145,6 +146,7 @@ class Scene extends React.Component {
     //floor.rotation.x = - 1//Math.PI / 2;
     floor.receiveShadow = true;
     floor.name = 'floor'
+    const folder1 = this.gui.addFolder( 'Floor' );
 
 
     const light = new THREE.AmbientLight( 0x404040 ); // soft white light
@@ -223,32 +225,7 @@ class Scene extends React.Component {
 
 
 
-
-    gears[0] = new Gear({
-      radius: 10,
-      position: {x: -4, y: -0.5},
-      rotationCenter: {x: 0, y: 0},
-      points: 10,
-      zRotation: 0.002,
-    })
-    gears[1] = new Gear({
-      radius: 5,
-      position: {x: -6, y: 2.5},
-      rotationCenter: {x: 0, y: 0},
-      points: 10,
-      zRotation: -0.01,
-      pausedDuration: 500,
-      movingDuration: 500,
-    })
-    gears[2] = new Gear({
-      radius: 0.5,
-      position: {x: -4, y: -0.5, z: 0},
-      rotationCenter: {x: 10, y: 0},
-      points: 4,
-      color: 0xe32110,
-      lineWidth: 2,
-      zRotation: -0.005,
-    })
+ 
 
   
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
