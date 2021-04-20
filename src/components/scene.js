@@ -4,65 +4,10 @@ import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
+const TWEEN = require('@tweenjs/tween.js')
 var cube;
-var model;
-class Gear {
-  constructor(props) {
- 
-    this.zRotation = props.zRotation 
-    this.pausedDuration = props.pausedDuration
-    this.pausedDelay = props.pausedDuration
-    this.movingDuration = props.movingDuration
-    this.movingDelay = props.movingDuration
-    this.isPaused = false 
-    this.create(props)
-  }
-
-  create(props) {
-    const curve = new THREE.EllipseCurve(
-      props.rotationCenter.x,  props.rotationCenter.y,
-      props.radius, props.radius,
-      0,  2 * Math.PI,  // aStartAngle, aEndAngle
-      false,            // aClockwise
-      0                 // aRotation
-    )
-    const points = curve.getPoints(props.points || 10)
-    const geometry = new THREE.BufferGeometry().setFromPoints( points );
-
-    const material = new THREE.LineBasicMaterial({ 
-      color: props.color || 0x555555,
-      linewidth: props.lineWidth || 1,
-    })
-    let circle = new THREE.Line( geometry, material )
-    circle.position.x = props.position.x || 0
-    circle.position.y = props.position.y || 0
-    circle.position.z = props.position.z || 0
-
-    this.geometry = circle
-  }
-
-  animate() {
-    if (this.isPaused && this.pausedDelay > 0) {
-      this.pausedDelay -= this.clock.getDelta()*1000
-    }
-    else if (this.pausedDuration && this.pausedDelay <= 0) {
-      this.pausedDelay = this.pausedDuration
-      this.isPaused = false
-    }
-    else if (this.movingDuration && this.movingDelay <= 0) {
-      this.movingDelay = this.movingDuration
-      this.isPaused = true
-    }
-    else if (this.movingDuration) {
-      this.movingDelay -= this.clock.getDelta()*1000
-      this.geometry.rotation.z += this.zRotation
-    }
-    else {
-      this.geometry.rotation.z += this.zRotation
-    }
-  }
-}
-
+var customMaterial;
+var tweent;
 class Scene extends React.Component {
   constructor(props) {
     super(props)
@@ -96,113 +41,54 @@ class Scene extends React.Component {
     dirLight.shadow.camera.far = 250;
     scene.add( dirLight );
     
-    this.gui.add(dirLight, 'visible').name('Light' ) ;
-    //   objects.push(mesh);
-    // });
+    this.gui.add(dirLight, 'visible').name('Light' ) ; 
 
     // ground 
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
     scene.add( mesh );
-
+    this.scene = scene;
  
-  
-   // this.camera = new THREE.PerspectiveCamera( 75, this.mount.offsetWidth/this.mount.offsetHeight, 0.1, 1000 )
-    // camera
     this.camera = new THREE.PerspectiveCamera( 45, this.mount.offsetWidth / this.mount.offsetHeight, 1, 100 );
     this.camera.position.set( - .7, .7, 2.6 );
-
-
+ 
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-    window.onload = setTimeout(this.fadeScene.bind(this), 250)
-
-    
-    
-    const numberOfGears = 3
-    let gears = new Array(numberOfGears)
-
-    const geometry = new THREE.BoxGeometry( 20, 20, 20 );
-    const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
-    cube = new THREE.Mesh( geometry, material );
-    cube.position.z = -25;
-    cube.castShadow = true;
-    cube.receiveShadow = true;
-    //scene.add( cube );
-
-    const planegeometry = new THREE.BoxGeometry( 200, 200 ,200);
-    const planematerial = new THREE.MeshStandardMaterial( {color: '#683286'});
-    
-    var floor = new THREE.Mesh( planegeometry, planematerial );
-    // scene.add( floor );
+    window.onload = this.fadeScene.bind(this)
    
-    // floor.position.y = -120;
-    // floor.position.z = -250;
-    // //floor.rotation.x = - 1//Math.PI / 2;
-    // floor.receiveShadow = true;
-    // floor.name = 'floor'
-    const folder1 = this.gui.addFolder( 'Floor' );
 
+    this.makeACube();
+    var cube = this.cube;
+    
+    //const folder1 = this.gui.addFolder( 'Floor' );
     this.gui.hide();
-
-
-
+  
     // // Load a glTF resource
     const loader = new GLTFLoader();
     var xthis = this;
-    loader.load(
-      // resource URL
-      '/assets/models/robot6.glb',
+    loader.load( '/assets/models/robot6.glb',
       // called when the resource is loaded
       function ( gltf ) { 
 
         var mixer  = new THREE.AnimationMixer(gltf.scene);
         xthis.mixers.push(mixer);
-        var action = mixer.clipAction( gltf.animations[ 0 ] );
-        // let xaction =  mixer.clipAction( gltf.animations[ 0 ] );
-       // this.actions.push(xaction);
-      //   xaction.clampWhenFinished = true;  
-      //   xaction.setLoop( THREE.LoopOnce ,1);
+        var action = mixer.clipAction( gltf.animations[ 0 ] ); 
+        action.play(); 
 
-
-
- 
-      //   // var action = mixer.clipAction( gltf.animations[ 0 ] );
-         action.play();
-
-
-
-
-        // var mixer = new THREE.AnimationMixer( mesh );
-        // mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
-        // mixers.push( mixer );
-
-
-
-
-  
-      //   gltf.animations.forEach((data, i) => {
-      //     console.log(`i value: ${i} |   Name:`, data.name);
-      //   //  this.addAndPlayThisClipAnimation(gltf, data) 
-      // }); 
-
-        //this.processNodeChanges();
-
-         var model = gltf.scene;
-         scene.add( model );
+        var model = gltf.scene;
+        scene.add( model );
 
         model.traverse( function ( object ) {
           object.castShadow = true
-          if ( object.isMesh ) object.castShadow = true;
-
+          if ( object.isMesh ) object.castShadow = true; 
         } );
 
  
-        const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
+        const dirLight = new THREE.DirectionalLight( 0xffffff ,0.45);
         dirLight.position.set( 3, 2, -2 );
         dirLight.castShadow = true;
         dirLight.shadow.camera.top = 2;
@@ -211,10 +97,7 @@ class Scene extends React.Component {
         dirLight.shadow.camera.right = 2;
         dirLight.shadow.camera.near = 0.1;
         dirLight.shadow.camera.far = 3;
-       // gltf.scene.add( dirLight );
- 
-        scene.add( gltf.scene ); 
-       // xthis.setRobotPosition(gltf.scene);
+       // gltf.scene.add( dirLight ); 
       },
       // called while loading is progressing
       function ( xhr ) { 
@@ -225,7 +108,6 @@ class Scene extends React.Component {
         console.log( 'An error happened' +JSON.stringify(error)); 
       }
     );
-
  
 
     loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
@@ -234,10 +116,30 @@ class Scene extends React.Component {
 
       var s = 60000.35;
       mesh.scale.set( s, s, s );
+
+
+
+
+      // tweent = new TWEEN.Tween(this.blurOverlayMaterial)
+      // .to({
+      //   opacity: 0
+      // }, 500)
+      // .easing(TWEEN.Easing.Cubic.InOut)
+      // .onComplete(function () { 
+      // })
+      // .start()  
+
+
+
+
+
+
+
+      
       mesh.position.z = -1;
       mesh.position.x = 1.2;
       mesh.rotation.y +=  -.4; 
-     // mesh.rotation.x =  Math.PI/1; 
+      // mesh.rotation.x =  Math.PI/1; 
  
       var model = gltf.scene;
       scene.add( model );
@@ -245,75 +147,155 @@ class Scene extends React.Component {
       model.traverse( function ( object ) {
         object.castShadow = true
         if ( object.isMesh ) object.castShadow = true; 
-      } ); 
-  } );
- 
+      }); 
+    });
+    
 
-
-
-
-
-    // // Load a glTF resource
- 
-    // loader.load(
-    //   // resource URL
-    //   '/assets/models/tedmedialogotedb.glb',
-    //   // called when the resource is loaded
-    //   function ( gltf ) { 
-    //     scene.add( gltf.scene ); 
-    //     console.log('it is added')
-    //   },
-    //   // called while loading is progressing
-    //   function ( xhr ) { 
-    //     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' ); 
-    //   },
-    //   // called when loading has errors
-    //   function ( error ) { 
-    //     console.log( 'An error happened' ); 
-    //   }
-    // );
-
-
-        
-
-
-
-
- 
-
-  
-    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-    // controls.enablePan = false;
-    // controls.enableZoom = false;
-    this.controls.target.set( 0, 1, 0 );
-    this.controls.update(); 
-
-
-
-    this.animate = function () {
-      var mixerUpdateDelta = this.animationClock.getDelta();
- 
+    this.animate = function () { 
+      TWEEN.update();
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
-         this.mixers[ i ].update( mixerUpdateDelta );
+         this.mixers[ i ].update( this.animationClock.getDelta() );
       } 
-
-      var SPEED = 0.01;
-      cube.rotation.x -= SPEED * 2;
-      cube.position.x -= SPEED * 2;
-      cube.rotation.y -= SPEED * .2; 
-      this.renderer.render(scene, this.camera)
+      customMaterial.uniforms.s.value+= .01;
+      var SPEED = 0.00251;
+      // this.cube.rotation.x -= SPEED * .3;
+      // this.cube.position.x -= SPEED * .3;
+      // this.cube.rotation.y -= SPEED * .092; 
+      this.renderer.render(this.scene, this.camera)
       requestAnimationFrame(this.animate.bind(this))
     }
 
-
+    this.setupControls();
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
+  }
+  unmakemakeTheNewLine(){
+    var xthis = this;   
+ 
+    var xxposition = { x: 1, y: 1, z: 1}; //fake - just want a tween render loop!!!!
+    var xxtarget = {x: 1, y:  2, z: 2}; //fake - just want a tween render loop!!!!
+    var linetween = new TWEEN.Tween(xxposition).to(xxtarget, 300); 
+
+    linetween.onUpdate(function() { 
+      xthis.lineGeometry.vertices.pop(); 
+      xthis.myline.setGeometry(  xthis.lineGeometry );  
+    }); 
+
+    linetween.onComplete(function() {  
+      xthis.lineGeometry = new THREE.Geometry() 
+    });  
+     
+    linetween.start();
+  }
+  setupControls(){
+    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+    this.controls.enablePan = true;
+    this.controls.enableZoom = false;
+    this.controls.target.set( 0, 1, 0 );
+    this.controls.update(); 
   }
   setRobotPosition(x){ 
     x.scale.set(4,4,4)
     x.position.set(0,0,-20)
     console.log('Robot is added')
+  }
+  makeACube(){
+    const vRing = `
+    varying vec2 vUv;
+
+    void main()
+    {
+      vUv = uv;
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      gl_Position = projectionMatrix * mvPosition;
+    }`;
+    const fRing = `
+
+    uniform float time;
+    uniform float id;
+    uniform float expanded;
+
+    varying vec2 vUv;
+    // 2D Random
+    float random (in vec2 st) {
+    return fract(sin(dot(st.xy,
+                         vec2(12.9898,78.233)))
+                 * 43758.5453123);
+    }
+
+    float noise (in vec2 st) {
+        st *= 1.;
+        vec2 i = floor(st);
+        vec2 f = fract(st);
+    
+    
+        // Four corners in 2D of a tile
+        float a = random(i);
+        float b = random(i + vec2(1.0, 0.0));
+        float c = random(i + vec2(0.0, 1.0));
+        float d = random(i + vec2(1.0, 1.0));
+    
+        // Smooth Interpolation
+    
+        // Cubic Hermine Curve.  Same as SmoothStep()
+        vec2 u = f*f*(3.0-2.0*f);
+        // u = smoothstep(0.,1.,f);
+    
+        // Mix 4 coorners percentages
+        return mix(a, b, u.x) +
+                (c - a)* u.y * (1.0 - u.x) +
+                (d - b) * u.x * u.y;
+    }
+
+    void main( void ) {
+
+      float st = distance(vUv,vec2(0.5))*1.1;
+      st += .01;
+      float pct = smoothstep(0.1,0.9,st);
+      float t = time *1.5;
+
+      // add noise
+      float scale = 3.1;
+      vec2 offset = vec2(2.7, -1.3);
+      pct += noise(vUv*scale+offset);
+      pct *= pct;
+
+      vec3 blue = vec3(0.,0.094,0.659);
+      vec3 cyan = vec3(0.2, 0.45, .95);
+      vec3 color = mix(blue, cyan, pct);
+      float finalAlpha = 1.;
+  
+    gl_FragColor = vec4( color, finalAlpha);
+
+    }`;
+
+    customMaterial = new THREE.ShaderMaterial({
+      uniforms:
+      {
+        "s": { value: -1.0 },
+        "b": { value: 1.0 },
+        "p": { value: 2.0 },
+        glowColor: { value: new THREE.Color(0x00dd00) }
+      },
+      vertexShader: vRing,
+      fragmentShader: fRing, 
+      side: THREE.FrontSide,
+      blending: THREE.AdditiveBlending,
+      transparent: true
+    })
+
+    
+    const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+    //const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+    this.cube = new THREE.Mesh( geometry, customMaterial );
+    this.cube.position.z = -5; 
+    this.cube.position.y = 1;
+    this.cube.position.x = 4;
+    this.cube.castShadow = true;
+    this.cube.castShadow = true;
+    this.cube.receiveShadow = true;
+   // this.scene.add( this.cube );
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onWindowResize.bind(this), false)
@@ -337,8 +319,7 @@ class Scene extends React.Component {
   }
 
   render() {
-
-
+ 
     const classes = this.state.hasLoaded === false ? [sceneStyles.webglContainer]
                                                    : [sceneStyles.webglContainer, sceneStyles.shown]
     return (
