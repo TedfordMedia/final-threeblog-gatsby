@@ -147,7 +147,7 @@ class Scene extends React.Component {
     // floor.name = 'floor'
     const folder1 = this.gui.addFolder( 'Floor' );
 
-    //this.gui.hide();
+    this.gui.hide();
 
 
 
@@ -162,17 +162,17 @@ class Scene extends React.Component {
 
         var mixer  = new THREE.AnimationMixer(gltf.scene);
         xthis.mixers.push(mixer);
-
-      //   let xaction =  mixer.clipAction( gltf.animations[ 0 ] );
-      //  // this.actions.push(xaction);
+        var action = mixer.clipAction( gltf.animations[ 0 ] );
+        // let xaction =  mixer.clipAction( gltf.animations[ 0 ] );
+       // this.actions.push(xaction);
       //   xaction.clampWhenFinished = true;  
       //   xaction.setLoop( THREE.LoopOnce ,1);
 
 
 
-      //   // mixer = new THREE.AnimationMixer( gltf.scene );
+ 
       //   // var action = mixer.clipAction( gltf.animations[ 0 ] );
-      //   xaction.play();
+         action.play();
 
 
 
@@ -201,8 +201,7 @@ class Scene extends React.Component {
 
         } );
 
-
-
+ 
         const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
         dirLight.position.set( 3, 2, -2 );
         dirLight.castShadow = true;
@@ -213,7 +212,6 @@ class Scene extends React.Component {
         dirLight.shadow.camera.near = 0.1;
         dirLight.shadow.camera.far = 3;
        // gltf.scene.add( dirLight );
-
  
         scene.add( gltf.scene ); 
        // xthis.setRobotPosition(gltf.scene);
@@ -240,10 +238,7 @@ class Scene extends React.Component {
       mesh.position.x = 1.2;
       mesh.rotation.y +=  -.4; 
      // mesh.rotation.x =  Math.PI/1; 
-
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      console.log('loadedddd')
+ 
       var model = gltf.scene;
       scene.add( model );
 
