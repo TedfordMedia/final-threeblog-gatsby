@@ -153,7 +153,7 @@ class Scene extends React.Component {
 
     // // Load a glTF resource
     const loader = new GLTFLoader();
-    
+    var xthis = this;
     loader.load(
       // resource URL
       '/assets/models/robot6.glb',
@@ -161,7 +161,7 @@ class Scene extends React.Component {
       function ( gltf ) { 
 
         var mixer  = new THREE.AnimationMixer(gltf.scene);
-      //   this.mixers.push(mixer);
+        xthis.mixers.push(mixer);
 
       //   let xaction =  mixer.clipAction( gltf.animations[ 0 ] );
       //  // this.actions.push(xaction);
@@ -214,9 +214,7 @@ class Scene extends React.Component {
         dirLight.shadow.camera.far = 3;
        // gltf.scene.add( dirLight );
 
-
-
-        
+ 
         scene.add( gltf.scene ); 
        // xthis.setRobotPosition(gltf.scene);
       },
@@ -230,33 +228,31 @@ class Scene extends React.Component {
       }
     );
 
-
-
-
+ 
 
     loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
 
       var mesh = gltf.scene.children[ 0 ];
 
-      var s = 100000.35;
+      var s = 70000.35;
       mesh.scale.set( s, s, s );
-      mesh.position.z = -5;
-       // mesh.position.x = 65;
+      mesh.position.z = -1;
+      mesh.position.x = 2;
       //mesh.rotation.y =  Math.PI/1; 
      // mesh.rotation.x =  Math.PI/1; 
 
       mesh.castShadow = true;
       mesh.receiveShadow = true;
-  console.log('loadedddd')
-  var model = gltf.scene;
-  scene.add( model );
-      // var mixer = new THREE.AnimationMixer( mesh );
-      // mixer.clipAction( gltf.scene.animations[ 0 ] ).setDuration( 1 ).play();
-      // this.mixers.push( mixer );
+      console.log('loadedddd')
+      var model = gltf.scene;
+      scene.add( model );
 
+      model.traverse( function ( object ) {
+        object.castShadow = true
+        if ( object.isMesh ) object.castShadow = true; 
+      } ); 
   } );
-
-
+ 
 
 
 
