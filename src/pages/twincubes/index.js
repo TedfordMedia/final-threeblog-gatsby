@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from 'react-three-fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
-alert('a')
+ 
 function Box(props) {
   // This reference will give us direct access to the mesh
   const mesh = useRef()
