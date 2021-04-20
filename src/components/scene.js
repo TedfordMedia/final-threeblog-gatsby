@@ -234,11 +234,11 @@ class Scene extends React.Component {
 
       var mesh = gltf.scene.children[ 0 ];
 
-      var s = 70000.35;
+      var s = 60000.35;
       mesh.scale.set( s, s, s );
       mesh.position.z = -1;
-      mesh.position.x = 2;
-      //mesh.rotation.y =  Math.PI/1; 
+      mesh.position.x = 1.2;
+      mesh.rotation.y +=  -.4; 
      // mesh.rotation.x =  Math.PI/1; 
 
       mesh.castShadow = true;
