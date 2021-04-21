@@ -17,8 +17,8 @@ const Hero = props => {
         )}
         <span />
 
-        <h1 style="user-select:none">{props.title}</h1>
-        <p style="user-select:none">{props.description}</p>
+        <h1>{props.title}</h1>
+        <p>{props.description}</p>
       </div>
     </section>
   )
