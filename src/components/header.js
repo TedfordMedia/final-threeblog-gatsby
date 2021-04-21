@@ -17,8 +17,7 @@ const Header = props => {
         <nav>
           <Link to={`/`} className={headerStyles.logo}>
             <StefanDevaiLogo />
-          </Link>
-
+          </Link> 
           <ul>
             <MenuItem to={`/about/`}>About</MenuItem>
           </ul>
