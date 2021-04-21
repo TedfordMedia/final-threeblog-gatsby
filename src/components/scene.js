@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
 import anime from 'animejs/lib/anime.es.js';
 
- 
+var scaleForLogo = 90000.35;
 var customMaterial;
 class Scene extends React.Component {
   constructor(props) {
@@ -71,45 +71,19 @@ class Scene extends React.Component {
           mixer.stopAllAction(); 
           b.play();
           b.crossFadeTo(a, .75);
-          a.play();
-
-
-          // action.stop();  
-          // actionidle3.play(); 
+          a.play(); 
         }, ytimeout);
 
         setTimeout(() => {
           actionidle3.stop();  
           actionChicked.play(); 
         }, ytimeout*2); 
-
-
  
         var model = gltf.scene;
         scene.add( model );
-
-           // Set an animejs timeline for the body of the android. Animejs
-        // changes values in relation to real-time, so even if some frames
-        // aren't rendered in time, animejs will act as if they were and
-        // skip ahead.
-        anime({
-          targets: model.position,
-          z: -10,
-          easing: 'easeInOutQuart',
-          loop: true,
-          direction: 'alternate',
-          duration: 10000,
-        });
-
-
-
-
-
-
-        model.traverse( function ( object ) {
-          object.castShadow = true
-          if ( object.isMesh ) object.castShadow = true; 
-        } );  
+   
+        xthis.doAnimateRobot(model);
+        xthis.setUpShadows(model);  
       },
       // called while loading is progressing
       function ( xhr ) { 
@@ -126,23 +100,22 @@ class Scene extends React.Component {
 
       var mesh = gltf.scene.children[ 0 ];
 
-      var s = 60000.35;
-      mesh.scale.set( s, s, s );
-      mesh.position.z = -1;
-      mesh.position.x = 1.2;
-      mesh.rotation.y +=  -.4; 
+      mesh.scale.set( scaleForLogo, scaleForLogo, scaleForLogo );
+    
+     // mesh.position.x = 1.2;
+     // mesh.rotation.y +=  -.4; 
       // mesh.rotation.x =  Math.PI/1; 
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       var model = gltf.scene;
       scene.add( model );
+      model.position.z = -1;
+      model.position.y = 5;
+      xthis.doAnimateLogo(model);
+      xthis.setUpShadows(model);  
 
-      model.traverse( function ( object ) {
-        object.castShadow = true
-        if ( object.isMesh ) object.castShadow = true; 
-      }); 
     });
-     
+    
     this.animate = function () {  
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
          this.mixers[ i ].update( this.animationClock.getDelta() );
@@ -160,6 +133,51 @@ class Scene extends React.Component {
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
+  }
+  setUpShadows(model){
+    model.traverse( function ( object ) {
+      object.castShadow = true
+      if ( object.isMesh ) object.castShadow = true; 
+    }); 
+  }
+  doAnimateRobot(model){
+    // anime({
+    //   targets: model.position,
+    //   z: -10,
+    //   easing: 'easeInOutQuart',
+    //   loop: true,
+    //   direction: 'alternate',
+    //   duration: 10000,
+    // });
+  }
+  doAnimateLogo(model){
+    // anime({
+    //   targets: model.position,
+    //   x: 2.2,
+    //   easing: 'easeOutBounce',
+    //   loop: false,
+    //   delay:1800,
+    //   direction: 'alternate',
+    //   duration: 500,
+    // });
+    anime({
+      targets: model.position,
+      y: 0,
+      delay:1000,
+      easing: 'easeOutBounce',
+      loop: false,
+      direction: 'alternate',
+      duration: 1000,
+    });
+    // anime({
+    //   targets: model.position,
+    //   z: 2.2,
+    //   delay:1800,
+    //   easing: 'easeOutBounce',
+    //   loop: false,
+    //   direction: 'alternate',
+    //   duration: 500,
+    // });
   }
   setUpFloor(){ 
       const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
