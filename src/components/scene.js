@@ -43,7 +43,11 @@ class Scene extends React.Component {
     this.camera.position.set( - .7, .7, 2.6 );
   
     window.onload = setTimeout(this.fadeScene.bind(this), 1)
-    this.setupRenderer();
+    this.renderer = new THREE.WebGLRenderer({ antialias: true })
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     this.makeACube(); 
     
     this.gui.hide();
@@ -118,13 +122,7 @@ class Scene extends React.Component {
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
   }
-  setUpRenderer(){
-    this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
-    this.renderer.setPixelRatio(window.devicePixelRatio)
-  }
+   
   setupControls(){
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
     this.controls.enablePan = true;
