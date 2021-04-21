@@ -31,8 +31,7 @@ class Scene extends React.Component {
  
     this.setUpLighting();
     
-    this.gui.add(dirLight, 'visible').name('Light' ) ; 
-
+  
     // ground 
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
     mesh.rotation.x = - Math.PI / 2;
@@ -102,7 +101,7 @@ class Scene extends React.Component {
     });
      
     this.animate = function () { 
-      TWEEN.update(0);
+      TWEEN.update();
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
          this.mixers[ i ].update( this.animationClock.getDelta() );
       } 
@@ -254,6 +253,7 @@ class Scene extends React.Component {
     dirLight.shadow.camera.near = 0.1;
     dirLight.shadow.camera.far = 250;
     this.scene.add( dirLight );
+    this.gui.add(dirLight, 'visible').name('Light' ) ; 
   }
   fadeScene() {
     this.mount.appendChild(this.renderer.domElement)
