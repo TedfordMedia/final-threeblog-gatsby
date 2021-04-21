@@ -1,7 +1,7 @@
 {
   "name": "history-bits-blog",
   "private": true,
-  "description": "A personal blog",
+  "description": "A personal blog.",
   "version": "0.2.0",
   "license": "MIT",
   "scripts": {
