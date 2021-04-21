@@ -98,9 +98,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "Stefan Devai's Blog",
-        short_name: `Stefan Devai`,
-        description: `Stefan Devai's blog about History and programming.`,
+        name: "Ted's Blog",
+        short_name: `Ted Tedford`,
+        description: `TedfordMedia Blog and Portfolio`,
         start_url: "/",
         background_color: "#111111",
         theme_color: "#e32110",
