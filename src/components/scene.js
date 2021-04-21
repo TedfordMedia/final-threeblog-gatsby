@@ -42,7 +42,7 @@ class Scene extends React.Component {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-    this.makeACube(); 
+   // this.makeACube(); 
     
     this.gui.hide();
   
