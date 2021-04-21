@@ -4,7 +4,7 @@ import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
-import  { TWEEN } from '@tweenjs/tween.js';
+ 
 
 var customMaterial;
 class Scene extends React.Component {
@@ -100,8 +100,7 @@ class Scene extends React.Component {
       }); 
     });
      
-    this.animate = function () { 
-      TWEEN.update();
+    this.animate = function () {  
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
          this.mixers[ i ].update( this.animationClock.getDelta() );
       } 
