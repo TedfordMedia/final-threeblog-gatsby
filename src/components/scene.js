@@ -128,7 +128,7 @@ class Scene extends React.Component {
     // this.controls.enableZoom = false;
     // this.controls.target.set( 0, 1, 0 );
     // this.controls.update(); 
-    this.camera.lookAt(0, 0, 0);
+    this.camera.lookAt(0, .9, 0);
   }
   setRobotPosition(x){ 
     x.scale.set(4,4,4)
