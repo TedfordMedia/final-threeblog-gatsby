@@ -29,14 +29,8 @@ class Scene extends React.Component {
     hemiLight.position.set( 0, 20, 0 );
     scene.add( hemiLight );
  
-    this.setUpLighting();
-    
-  
-    // ground 
-    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
-    mesh.rotation.x = - Math.PI / 2;
-    mesh.receiveShadow = true;
-    scene.add( mesh );
+    this.setUpLighting(); 
+    this.setUpFloor();
     this.scene = scene;
  
     this.camera = new THREE.PerspectiveCamera( 45, this.mount.offsetWidth / this.mount.offsetHeight, 1, 100 );
@@ -122,13 +116,19 @@ class Scene extends React.Component {
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
   }
-   
+  setUpFloor(){ 
+      const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: true } ) );
+      mesh.rotation.x = - Math.PI / 2;
+      mesh.receiveShadow = true;
+      this.scene.add( mesh );
+  }
   setupControls(){
-    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-    this.controls.enablePan = false;
-    this.controls.enableZoom = false;
-    this.controls.target.set( 0, 1, 0 );
-    this.controls.update(); 
+    // this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+    // this.controls.enablePan = false;
+    // this.controls.enableZoom = false;
+    // this.controls.target.set( 0, 1, 0 );
+    // this.controls.update(); 
+    this.camera.lookAt(0, 0, 0);
   }
   setRobotPosition(x){ 
     x.scale.set(4,4,4)
