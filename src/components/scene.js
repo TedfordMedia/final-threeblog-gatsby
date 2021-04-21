@@ -5,8 +5,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
 import  { TWEEN } from '@tweenjs/tween.js';
-var cube;
- var customMaterial;
+
+var customMaterial;
 class Scene extends React.Component {
   constructor(props) {
     super(props)
@@ -28,8 +28,7 @@ class Scene extends React.Component {
     const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
     hemiLight.position.set( 0, 20, 0 );
     scene.add( hemiLight );
-
-   
+ 
     this.setUpLighting();
     
     this.gui.add(dirLight, 'visible').name('Light' ) ; 
@@ -43,14 +42,9 @@ class Scene extends React.Component {
  
     this.camera = new THREE.PerspectiveCamera( 45, this.mount.offsetWidth / this.mount.offsetHeight, 1, 100 );
     this.camera.position.set( - .7, .7, 2.6 );
- 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
-    this.renderer.setPixelRatio(window.devicePixelRatio)
+  
     window.onload = setTimeout(this.fadeScene.bind(this), 1)
-    
+    this.setupRenderer();
     this.makeACube(); 
     
     this.gui.hide();
@@ -73,19 +67,7 @@ class Scene extends React.Component {
         model.traverse( function ( object ) {
           object.castShadow = true
           if ( object.isMesh ) object.castShadow = true; 
-        } );
-
- 
-        const dirLight = new THREE.DirectionalLight( 0xffffff ,0.45);
-        dirLight.position.set( 3, 2, -2 );
-        dirLight.castShadow = true;
-        dirLight.shadow.camera.top = 2;
-        dirLight.shadow.camera.bottom = - 2;
-        dirLight.shadow.camera.left = - 2;
-        dirLight.shadow.camera.right = 2;
-        dirLight.shadow.camera.near = 0.1;
-        dirLight.shadow.camera.far = 3;
-       // gltf.scene.add( dirLight ); 
+        } );  
       },
       // called while loading is progressing
       function ( xhr ) { 
@@ -118,9 +100,9 @@ class Scene extends React.Component {
         if ( object.isMesh ) object.castShadow = true; 
       }); 
     });
-    
-
+     
     this.animate = function () { 
+      TWEEN.update(0);
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
          this.mixers[ i ].update( this.animationClock.getDelta() );
       } 
@@ -137,6 +119,13 @@ class Scene extends React.Component {
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
+  }
+  setUpRenderer(){
+    this.renderer = new THREE.WebGLRenderer({ antialias: true })
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
   }
   setupControls(){
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
