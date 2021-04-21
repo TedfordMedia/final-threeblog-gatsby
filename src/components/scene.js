@@ -58,26 +58,30 @@ class Scene extends React.Component {
         // var action = mixer.clipAction( gltf.animations[ 0 ] ); 
         // action.play(); 
         var action = mixer.clipAction( gltf.animations[ 2 ] ); 
+        var actionChicked = mixer.clipAction( gltf.animations[ 0 ] ); 
+        var actionidle3 = mixer.clipAction( gltf.animations[ 3 ] ); 
         action.play(); 
-
-        var xtimeout = 10000;
-        var ytimeout = 10000;
-
-
-        
-
-        // setTimeout(() => {
-        //   action.stop(); 
-        //   action = mixer.clipAction( gltf.animations[ 3 ] ); 
-        //   action.play(); 
-        //   setTimeout(() => {
-        //     action.stop(); 
-        //     action = mixer.clipAction( gltf.animations[ 0 ] ); 
-        //     action.play(); 
-        //   }, ytimeout);
-        // }, xtimeout);
+ 
+        var ytimeout = 5000;
+ 
+        setTimeout(() => {
+var b = action;
+var a = actionidle3
+          mixer.stopAllAction(); 
+          b.play();
+          b.crossFadeTo(a, .75);
+          a.play();
 
 
+          // action.stop();  
+          // actionidle3.play(); 
+        }, ytimeout);
+
+        setTimeout(() => {
+          actionidle3.stop();  
+          actionChicked.play(); 
+        }, ytimeout*2); 
+ 
         var model = gltf.scene;
         scene.add( model );
 
