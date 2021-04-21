@@ -56,7 +56,7 @@ class Scene extends React.Component {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-    window.onload = setTimeout(this.fadeScene.bind(this), 250)
+    window.onload = setTimeout(this.fadeScene.bind(this), 1)
    
 
     this.makeACube();
@@ -118,7 +118,8 @@ class Scene extends React.Component {
       mesh.position.x = 1.2;
       mesh.rotation.y +=  -.4; 
       // mesh.rotation.x =  Math.PI/1; 
- 
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       var model = gltf.scene;
       scene.add( model );
 
