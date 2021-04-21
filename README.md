@@ -10,4 +10,4 @@
 
 Notes to be added!
 
- 
+ npm i @react-three/fiber --legacy-peer-deps
