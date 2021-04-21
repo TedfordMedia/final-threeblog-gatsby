@@ -5,9 +5,14 @@
   </a>
 </p>
 <h1 align="center">
-  TedfordMedia Website SourceCode (OpenSource)
+  TedfordMedia Website (OpenSource)
 </h1>
 
-Notes to be added!
 
- npm i @react-three/fiber --legacy-peer-deps
+Here is the full source code for TedfordMedia.com
+
+See how the Three.js coding interacts with React, Gatsby and React-Three-Fiber
+
+Clone of fork this repository and get up and running on your own machine in minutes.
+
+npm i @react-three/fiber --legacy-peer-deps

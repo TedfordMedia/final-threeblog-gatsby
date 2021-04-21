@@ -4,8 +4,9 @@ import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
- 
+import anime from 'animejs/lib/anime.es.js';
 
+ 
 var customMaterial;
 class Scene extends React.Component {
   constructor(props) {
@@ -65,8 +66,8 @@ class Scene extends React.Component {
         var ytimeout = 5000;
  
         setTimeout(() => {
-var b = action;
-var a = actionidle3
+          var b = action;
+          var a = actionidle3
           mixer.stopAllAction(); 
           b.play();
           b.crossFadeTo(a, .75);
@@ -81,9 +82,29 @@ var a = actionidle3
           actionidle3.stop();  
           actionChicked.play(); 
         }, ytimeout*2); 
+
+
  
         var model = gltf.scene;
         scene.add( model );
+
+           // Set an animejs timeline for the body of the android. Animejs
+        // changes values in relation to real-time, so even if some frames
+        // aren't rendered in time, animejs will act as if they were and
+        // skip ahead.
+        anime({
+          targets: model.position,
+          z: -10,
+          easing: 'easeInOutQuart',
+          loop: true,
+          direction: 'alternate',
+          duration: 10000,
+        });
+
+
+
+
+
 
         model.traverse( function ( object ) {
           object.castShadow = true

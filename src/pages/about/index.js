@@ -5,8 +5,7 @@ import SEO from "../../components/SEO"
 import Img from "gatsby-image"
 import aboutStyles from "./about.module.sass"
 
-import GitHubIcon from "../../../static/assets/svg/github.svg"
-import InstagramIcon from "../../../static/assets/svg/instagram.svg"
+import GitHubIcon from "../../../static/assets/svg/github.svg" 
 import EmailIcon from "../../../static/assets/svg/email.svg"
 
 export default ({ data }) => {
