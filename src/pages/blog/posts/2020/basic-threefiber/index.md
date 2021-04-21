@@ -2,6 +2,7 @@
 title: Using React-Three-Fiber
 date: "2021-04-17T21:40:00.169Z" 
 featuredImage: r3ff.png
+language: "en"
 description: Getting started with Using React-Three-Fiber
 tags: ["three.js", "Gatsby", "React"]
 ---

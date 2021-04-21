@@ -1,6 +1,7 @@
 ---
 title: Create React Gatsby Site
 date: "2021-04-16T22:40:32.169Z"
+language: "en"
 videoSourceURL: https://www.youtube.com/embed/dQw4w9WgXcQ
 featuredImage: "./gatsbyblogsimple.png"
 featuredImageCaption: "Amethyst Waters gameplay."

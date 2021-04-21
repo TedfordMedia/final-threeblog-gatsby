@@ -1,6 +1,7 @@
 ---
 title: Gatsby Font PreLoading
 date: "2021-04-17T00:40:00.169Z"
+language: "en"
 videoSourceURL: https://www.youtube.com/embed/dQw4w9WgXcQ
 videoTitle: "Gatsby is Never Gonna Give You Up"
 description: React often has a font jump on itiial page load so... npm install gatsby-plugin-preload-fonts 

@@ -44,7 +44,7 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "DD-MMM-YYYY")
-            language
+             
             tags
           }
           fields {
