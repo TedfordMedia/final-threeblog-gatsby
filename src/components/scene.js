@@ -117,7 +117,7 @@ class Scene extends React.Component {
       requestAnimationFrame(this.animate.bind(this))
     }
 
-    //this.setupControls();
+    this.setupControls();
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
@@ -125,7 +125,7 @@ class Scene extends React.Component {
    
   setupControls(){
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-    this.controls.enablePan = true;
+    this.controls.enablePan = false;
     this.controls.enableZoom = false;
     this.controls.target.set( 0, 1, 0 );
     this.controls.update(); 
