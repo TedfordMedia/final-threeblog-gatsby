@@ -4,10 +4,8 @@ import sceneStyles from "./styles/scene.module.sass"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
-const TWEEN = require('@tweenjs/tween.js')
 var cube;
-var customMaterial;
-var tweent;
+ var customMaterial;
 class Scene extends React.Component {
   constructor(props) {
     super(props)
@@ -58,7 +56,7 @@ class Scene extends React.Component {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-    window.onload = this.fadeScene.bind(this)
+    window.onload = setTimeout(this.fadeScene.bind(this), 250)
    
 
     this.makeACube();
@@ -116,18 +114,6 @@ class Scene extends React.Component {
 
       var s = 60000.35;
       mesh.scale.set( s, s, s );
-
-
-
-
-      
-
-
-
-
-
-
-      
       mesh.position.z = -1;
       mesh.position.x = 1.2;
       mesh.rotation.y +=  -.4; 
@@ -144,7 +130,6 @@ class Scene extends React.Component {
     
 
     this.animate = function () { 
-      TWEEN.update();
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
          this.mixers[ i ].update( this.animationClock.getDelta() );
       } 
@@ -161,24 +146,6 @@ class Scene extends React.Component {
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
-  }
-  unmakemakeTheNewLine(){
-    var xthis = this;   
- 
-    var xxposition = { x: 1, y: 1, z: 1}; //fake - just want a tween render loop!!!!
-    var xxtarget = {x: 1, y:  2, z: 2}; //fake - just want a tween render loop!!!!
-    var linetween = new TWEEN.Tween(xxposition).to(xxtarget, 300); 
-
-    linetween.onUpdate(function() { 
-      xthis.lineGeometry.vertices.pop(); 
-      xthis.myline.setGeometry(  xthis.lineGeometry );  
-    }); 
-
-    linetween.onComplete(function() {  
-      xthis.lineGeometry = new THREE.Geometry() 
-    });  
-     
-    linetween.start();
   }
   setupControls(){
     this.controls = new OrbitControls( this.camera, this.renderer.domElement );
@@ -281,13 +248,13 @@ class Scene extends React.Component {
     const geometry = new THREE.BoxGeometry( 2, 2, 2 );
     //const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
     this.cube = new THREE.Mesh( geometry, customMaterial );
-    this.cube.position.z = -5; 
+    this.cube.position.z = -15; 
     this.cube.position.y = 1;
-    this.cube.position.x = 4;
+    this.cube.position.y = 1;
     this.cube.castShadow = true;
     this.cube.castShadow = true;
     this.cube.receiveShadow = true;
-   // this.scene.add( this.cube );
+    this.scene.add( this.cube );
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onWindowResize.bind(this), false)
