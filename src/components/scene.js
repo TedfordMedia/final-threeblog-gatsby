@@ -42,7 +42,7 @@ class Scene extends React.Component {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-   // this.makeACube(); 
+    this.makeACube(); 
     
     this.gui.hide();
   
@@ -254,7 +254,7 @@ var a = actionidle3
     this.cube.castShadow = true;
     this.cube.castShadow = true;
     this.cube.receiveShadow = true;
-    this.scene.add( this.cube );
+  //  this.scene.add( this.cube );
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onWindowResize.bind(this), false)
