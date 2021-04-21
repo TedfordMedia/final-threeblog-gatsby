@@ -55,8 +55,28 @@ class Scene extends React.Component {
 
         var mixer  = new THREE.AnimationMixer(gltf.scene);
         xthis.mixers.push(mixer);
-        var action = mixer.clipAction( gltf.animations[ 0 ] ); 
+        // var action = mixer.clipAction( gltf.animations[ 0 ] ); 
+        // action.play(); 
+        var action = mixer.clipAction( gltf.animations[ 2 ] ); 
         action.play(); 
+
+        var xtimeout = 10000;
+        var ytimeout = 10000;
+
+
+        
+
+        // setTimeout(() => {
+        //   action.stop(); 
+        //   action = mixer.clipAction( gltf.animations[ 3 ] ); 
+        //   action.play(); 
+        //   setTimeout(() => {
+        //     action.stop(); 
+        //     action = mixer.clipAction( gltf.animations[ 0 ] ); 
+        //     action.play(); 
+        //   }, ytimeout);
+        // }, xtimeout);
+
 
         var model = gltf.scene;
         scene.add( model );
