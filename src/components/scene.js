@@ -143,7 +143,7 @@ class Scene extends React.Component {
       requestAnimationFrame(this.animate.bind(this))
     }
 
-    this.setupControls();
+    //this.setupControls();
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
