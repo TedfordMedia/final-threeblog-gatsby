@@ -28,16 +28,8 @@ class Scene extends React.Component {
     hemiLight.position.set( 0, 20, 0 );
     scene.add( hemiLight );
 
-    const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
-    dirLight.position.set( 3, 122, 122 );
-    dirLight.castShadow = true;
-    dirLight.shadow.camera.top = 2;
-    dirLight.shadow.camera.bottom = - 2;
-    dirLight.shadow.camera.left = - 2;
-    dirLight.shadow.camera.right = 2;
-    dirLight.shadow.camera.near = 0.1;
-    dirLight.shadow.camera.far = 250;
-    scene.add( dirLight );
+   
+    this.setUpLighting();
     
     this.gui.add(dirLight, 'visible').name('Light' ) ; 
 
@@ -57,12 +49,9 @@ class Scene extends React.Component {
     this.renderer.setSize(this.mount.offsetWidth, this.mount.offsetHeight)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     window.onload = setTimeout(this.fadeScene.bind(this), 1)
-   
-
-    this.makeACube();
-    var cube = this.cube;
     
-    //const folder1 = this.gui.addFolder( 'Floor' );
+    this.makeACube(); 
+    
     this.gui.hide();
   
     // // Load a glTF resource
@@ -264,7 +253,18 @@ class Scene extends React.Component {
   shouldComponentUpdate() {
     this.onWindowResize()
   }
-
+  setUpLighting(){
+    const dirLight = new THREE.DirectionalLight( 0xffffff ,0.5);
+    dirLight.position.set( 3, 122, 122 );
+    dirLight.castShadow = true;
+    dirLight.shadow.camera.top = 2;
+    dirLight.shadow.camera.bottom = - 2;
+    dirLight.shadow.camera.left = - 2;
+    dirLight.shadow.camera.right = 2;
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far = 250;
+    this.scene.add( dirLight );
+  }
   fadeScene() {
     this.mount.appendChild(this.renderer.domElement)
     this.setState({ hasLoaded: true })
