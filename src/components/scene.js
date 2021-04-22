@@ -188,6 +188,27 @@ class Scene extends React.Component {
     );
  
 
+    var scaleforFlam = .005
+    loader.load('/assets/models/Flamingo.glb', function ( gltf ) {
+
+      var qmesh = gltf.scene.children[ 0 ];
+
+      qmesh.scale.set( scaleforFlam, scaleforFlam, scaleforFlam );
+
+      var fmodel = gltf.scene;
+      xthis.scene.add( fmodel );
+      xthis.setUpShadows( fmodel );  
+      fmodel.position.z = -1;
+      fmodel.position.x = -1;
+      fmodel.position.y = 1; 
+      var zmixer  = new THREE.AnimationMixer(gltf.scene);
+      xthis.mixers.push(zmixer); 
+      var zaction = zmixer.clipAction( gltf.animations[ 0 ] );  
+      zaction.play();   
+    });
+
+
+
     loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
 
       var mesh = gltf.scene.children[ 0 ];
