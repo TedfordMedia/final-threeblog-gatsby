@@ -8,6 +8,7 @@ import anime from 'animejs/lib/anime.es.js';
 
 var scaleForLogo = 90000.35;
 var customMaterial;
+var mesh;
 class Scene extends React.Component {
   constructor(props) {
     super(props)
@@ -36,7 +37,8 @@ class Scene extends React.Component {
  
     this.camera = new THREE.PerspectiveCamera( 45, this.mount.offsetWidth / this.mount.offsetHeight, 1, 100 );
     this.camera.position.set( - .7, .7, 2.6 );
-  
+
+     
     window.onload = setTimeout(this.fadeScene.bind(this), 1)
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.outputEncoding = THREE.sRGBEncoding;
@@ -46,7 +48,56 @@ class Scene extends React.Component {
     this.makeACube(); 
     
     this.gui.hide();
+ 
+    var sampleClosedSpline = new THREE.CatmullRomCurve3( [
+      new THREE.Vector3( -10, 0, 10 ),
+      new THREE.Vector3( -5, 0, 5 ),
+      new THREE.Vector3( 0, 0, 0 ),
+      new THREE.Vector3( 5, 0, 5 ),
+      new THREE.Vector3( 10, 0, 10 )
+    ] );
+    
+    sampleClosedSpline.curveType = 'catmullrom';
+    sampleClosedSpline.closed = true;
+    var params = {
+      spline: 'SampleClosedSpline',
+      scale: 1,
+      extrusionSegments: 100,
+      radiusSegments: 3,
+      closed: true,
+      animationView: true,
+      lookAhead: false,
+      cameraHelper: false,
+  };
+    // Keep a dictionary of Curve instances
+    var splines = { 
+        SampleClosedSpline: sampleClosedSpline
+    };
+
+    function addTube() {
+
+      if ( mesh !== undefined ) { 
+          this.scene.remove( mesh );
+          mesh.geometry.dispose(); 
+      }
   
+      var extrudePath = splines[ params.spline ]; 
+      var tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, .02, params.radiusSegments, params.closed );
+  
+      addGeometry( tubeGeometry ); 
+     // setScale();
+  
+    }
+   // addTube();
+  
+    function addGeometry( xgeometry ) { 
+      var xmaterial = new THREE.MeshLambertMaterial( { color: 0xff00ff } ); 
+      var xmesh = new THREE.Mesh( xgeometry, xmaterial ); 
+      xmesh.name = 'spliiiine'
+      xmesh.position.z = -5;
+      xthis.scene.add( xmesh ); 
+    }
+ 
     // // Load a glTF resource
     const loader = new GLTFLoader();
     var xthis = this;
@@ -191,7 +242,7 @@ class Scene extends React.Component {
     // this.controls.enableZoom = false;
     // this.controls.target.set( 0, 1, 0 );
     // this.controls.update(); 
-    this.camera.lookAt(0, .9, 0);
+   this.camera.lookAt(0, .9, 0);
   }
   setRobotPosition(x){ 
     x.scale.set(4,4,4)

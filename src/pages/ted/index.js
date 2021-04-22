@@ -6,7 +6,7 @@ export default ({ data }) => {
     <div id="divabcdef">
       <Layout>
        <div id="myotherdivinner">
-         hello
+         hello.
        </div>
       </Layout>
     </div>
