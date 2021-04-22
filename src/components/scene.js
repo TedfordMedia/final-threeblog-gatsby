@@ -141,35 +141,36 @@ class Scene extends React.Component {
  
     // // Load a glTF resource
     const loader = new GLTFLoader();
+    this.loader = loader;
     var xthis = this;
     loader.load( '/assets/models/robot6.glb',
       // called when the resource is loaded
       function ( gltf ) { 
 
-        var mixer  = new THREE.AnimationMixer(gltf.scene);
-        xthis.mixers.push(mixer);
+        var thismixer  = new THREE.AnimationMixer(gltf.scene);
+        xthis.mixers.push(thismixer);
         // var action = mixer.clipAction( gltf.animations[ 0 ] ); 
         // action.play(); 
-        var action = mixer.clipAction( gltf.animations[ 2 ] ); 
-        var actionChicked = mixer.clipAction( gltf.animations[ 0 ] ); 
-        var actionidle3 = mixer.clipAction( gltf.animations[ 3 ] ); 
-        action.play(); 
+        var aaaaction = thismixer.clipAction( gltf.animations[ 2 ] ); 
+        var actionChicked = thismixer.clipAction( gltf.animations[ 0 ] ); 
+        var actionidle3 = thismixer.clipAction( gltf.animations[ 3 ] ); 
+        aaaaction.play(); 
  
-        var ytimeout = 5000;
+        // var ytimeout = 5000;
  
-        setTimeout(() => {
-          var b = action;
-          var a = actionidle3
-          mixer.stopAllAction(); 
-          b.play();
-          b.crossFadeTo(a, .75);
-          a.play(); 
-        }, ytimeout);
+        // setTimeout(() => {
+        //   var b = action;
+        //   var a = actionidle3
+        //   mixer.stopAllAction(); 
+        //   b.play();
+        //   b.crossFadeTo(a, .75);
+        //   a.play(); 
+        // }, ytimeout);
 
-        setTimeout(() => {
-          actionidle3.stop();  
-          actionChicked.play(); 
-        }, ytimeout*2); 
+        // setTimeout(() => {
+        //   actionidle3.stop();  
+        //   actionChicked.play(); 
+        // }, ytimeout*2); 
  
         var model = gltf.scene;
         scene.add( model );
@@ -187,29 +188,10 @@ class Scene extends React.Component {
       }
     );
  
-
-    var scaleforFlam = .005
-    loader.load('/assets/models/Flamingo.glb', function ( gltf ) {
-
-      var qmesh = gltf.scene.children[ 0 ];
-
-      qmesh.scale.set( scaleforFlam, scaleforFlam, scaleforFlam );
-
-      var fmodel = gltf.scene;
-      xthis.scene.add( fmodel );
-      xthis.setUpShadows( fmodel );  
-      fmodel.position.z = -1;
-      fmodel.position.x = -1;
-      fmodel.position.y = 1; 
-      var zmixer  = new THREE.AnimationMixer(gltf.scene);
-      xthis.mixers.push(zmixer); 
-      var zaction = zmixer.clipAction( gltf.animations[ 0 ] );  
-      zaction.play();   
-    });
+    this.doFlamingo();
 
 
-
-    loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
+    this.loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
 
       var mesh = gltf.scene.children[ 0 ];
 
@@ -243,6 +225,28 @@ class Scene extends React.Component {
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
+  }
+  doFlamingo(){
+    var xthis = this;
+    var scaleforFlam = .005
+    xthis.loader.load('/assets/models/Flamingo.glb', function ( gltf ) {
+
+      var qmesh = gltf.scene.children[ 0 ];
+
+      qmesh.scale.set( scaleforFlam, scaleforFlam, scaleforFlam );
+
+      var zfmodel = gltf.scene;
+      xthis.scene.add( zfmodel );
+      // xthis.setUpShadows( fmodel );  
+      zfmodel.position.z = -1;
+      zfmodel.position.x = -1;
+      zfmodel.position.y = 1; 
+      var zmixer  = new THREE.AnimationMixer(gltf.scene);
+      xthis.mixers.push(zmixer); 
+      var zaction = zmixer.clipAction( gltf.animations[ 0 ] );  
+      zaction.play();   
+    });
+
   }
   setUpShadows(model){
     model.traverse( function ( object ) {
