@@ -59,6 +59,7 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
     "react-spring": "^9.1.1",
+    "react-three-fiber": "^6.0.13",
     "react-typography": "^0.16.19",
     "three": "^0.114.0",
     "typography": "^0.16.19",

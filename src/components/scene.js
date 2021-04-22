@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module.js';
 import anime from 'animejs/lib/anime.es.js';
 
-var scaleForLogo = 90000.35;
+var scaleForLogo = 60000.35;
 var customMaterial;
 var mesh;
 class Scene extends React.Component {
@@ -193,15 +193,12 @@ class Scene extends React.Component {
       var mesh = gltf.scene.children[ 0 ];
 
       mesh.scale.set( scaleForLogo, scaleForLogo, scaleForLogo );
-    
-     // mesh.position.x = 1.2;
-     // mesh.rotation.y +=  -.4; 
-      // mesh.rotation.x =  Math.PI/1; 
+   
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       var model = gltf.scene;
       scene.add( model );
-      model.position.z = -1;
+      model.position.z = -4;
       model.position.y = 5;
       xthis.doAnimateLogo(model);
       xthis.setUpShadows(model);  
@@ -255,7 +252,7 @@ class Scene extends React.Component {
     anime({
       targets: model.position,
       y: 0,
-      delay:1000,
+      delay:5000,
       easing: 'easeOutBounce',
       loop: false,
       direction: 'alternate',
