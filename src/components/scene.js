@@ -50,11 +50,11 @@ class Scene extends React.Component {
     this.gui.hide();
  
     var sampleClosedSpline = new THREE.CatmullRomCurve3( [
-      new THREE.Vector3( -10, 0, 10 ),
-      new THREE.Vector3( -5, 0, 5 ),
-      new THREE.Vector3( 0, 0, 0 ),
-      new THREE.Vector3( 5, 0, 5 ),
-      new THREE.Vector3( 10, 0, 10 )
+      new THREE.Vector3( -10, .5, 10 ),
+      new THREE.Vector3( -5, .3, 5 ),
+      new THREE.Vector3( 0, 1, 0 ),
+      new THREE.Vector3( 3, .4, 3 ),
+      new THREE.Vector3( 6, .2, 8 )
     ] );
     
     sampleClosedSpline.curveType = 'catmullrom';
@@ -129,7 +129,7 @@ class Scene extends React.Component {
      // setScale();
   
     }
-   // addTube();
+    addTube();
   
     function addGeometry( xgeometry ) { 
       var xmaterial = new THREE.MeshLambertMaterial( { color: 0xff00ff } ); 
@@ -156,16 +156,8 @@ class Scene extends React.Component {
         var actionidle3 = thismixer.clipAction( gltf.animations[ 3 ] ); 
         aaaaction.play(); 
  
-        // var ytimeout = 5000;
- 
-        // setTimeout(() => {
-        //   var b = action;
-        //   var a = actionidle3
-        //   mixer.stopAllAction(); 
-        //   b.play();
-        //   b.crossFadeTo(a, .75);
-        //   a.play(); 
-        // }, ytimeout);
+    
+      //xthis.switchAnimations(gltf);
 
         // setTimeout(() => {
         //   actionidle3.stop();  
@@ -189,8 +181,7 @@ class Scene extends React.Component {
     );
  
     this.doFlamingo();
-
-
+ 
     this.loader.load('/assets/models/tedmedialogotedb.glb', function ( gltf ) {
 
       var mesh = gltf.scene.children[ 0 ];
@@ -209,14 +200,11 @@ class Scene extends React.Component {
     });
     
     this.animate = function () {  
+      var time = this.animationClock.getDelta() ;
       for ( var i = 0; i < this.mixers.length; ++ i ) { 
-         this.mixers[ i ].update( this.animationClock.getDelta() );
+         this.mixers[ i ].update( time );
       } 
-      customMaterial.uniforms.s.value+= .01;
-      var SPEED = 0.00251;
-      // this.cube.rotation.x -= SPEED * .3;
-      // this.cube.position.x -= SPEED * .3;
-      // this.cube.rotation.y -= SPEED * .092; 
+      customMaterial.uniforms.s.value+= .01; 
       this.renderer.render(this.scene, this.camera)
       requestAnimationFrame(this.animate.bind(this))
     }
@@ -225,6 +213,30 @@ class Scene extends React.Component {
     this.animate()
 
     window.addEventListener('resize', this.onWindowResize.bind(this), false)
+  }
+  switchAnimations(gltf){
+
+
+    // var thismixer  = new THREE.AnimationMixer(gltf.scene);
+    // xthis.mixers.push(thismixer);
+    // // var action = mixer.clipAction( gltf.animations[ 0 ] ); 
+    // // action.play(); 
+    // var aaaaction = thismixer.clipAction( gltf.animations[ 2 ] ); 
+    // var actionChicked = thismixer.clipAction( gltf.animations[ 0 ] ); 
+    // var actionidle3 = thismixer.clipAction( gltf.animations[ 3 ] ); 
+    // aaaaction.play(); 
+
+    var ytimeout = 5000;
+
+    setTimeout(() => {
+      console.log('hello action change   number of animations = '+gltf.animations.length)
+      // var b = action;
+      // var a = actionidle3
+      // mixer.stopAllAction(); 
+      // b.play();
+      // b.crossFadeTo(a, .75);
+      // a.play(); 
+    }, ytimeout);
   }
   doFlamingo(){
     var xthis = this;
@@ -241,10 +253,10 @@ class Scene extends React.Component {
       zfmodel.position.z = -1;
       zfmodel.position.x = -1;
       zfmodel.position.y = 1; 
-      var zmixer  = new THREE.AnimationMixer(gltf.scene);
-      xthis.mixers.push(zmixer); 
-      var zaction = zmixer.clipAction( gltf.animations[ 0 ] );  
-      zaction.play();   
+      var zzzmixer  = new THREE.AnimationMixer(gltf.scene);
+      xthis.mixers.push(zzzmixer); 
+      var zzzzaction = zzzmixer.clipAction( gltf.animations[ 0 ] );  
+      zzzzaction.play();   
     });
 
   }
@@ -300,11 +312,11 @@ class Scene extends React.Component {
       this.scene.add( mesh );
   }
   setupControls(){
-    // this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-    // this.controls.enablePan = false;
-    // this.controls.enableZoom = false;
-    // this.controls.target.set( 0, 1, 0 );
-    // this.controls.update(); 
+    this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+    this.controls.enablePan = false;
+    this.controls.enableZoom = false;
+    this.controls.target.set( 0, 1, 0 );
+    this.controls.update(); 
    this.camera.lookAt(0, .9, 0);
   }
   setRobotPosition(x){ 
