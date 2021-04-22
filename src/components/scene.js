@@ -74,6 +74,47 @@ class Scene extends React.Component {
         SampleClosedSpline: sampleClosedSpline
     };
 
+
+
+
+    // var follower;
+
+    // var xLoaderGltf = new GLTFLoader();
+    // xLoaderGltf.load('/assets/models/starbuk2.glb', function ( gltf ) {
+
+    //     var xmesh = gltf.scene;
+
+    //      var s = .11;
+    //      xmesh.scale.set( s, s, s );
+    //      xmesh.position.z = -2;
+    //      xmesh.position.x = 2;
+    //         // mesh.position.x = 65;
+    //     //mesh.rotation.y =  Math.PI/1; 
+    //    // mesh.rotation.x =  Math.PI/1; 
+
+    //       //   xmesh.castShadow = true;
+    //       //  xmesh.receiveShadow = true;
+
+
+    //     // const mygroup = new THREE.Group();
+    //     // mygroup.add( xmesh );
+
+
+    //     xthis.scene.add( xmesh );
+    //   //  // follower = mygroup;
+
+    //   //   var mixer = new THREE.AnimationMixer( xmesh );
+    //   //   mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
+    //   //   xthis.mixers.push( mixer );
+
+    // } );
+
+
+
+
+
+
+
     function addTube() {
 
       if ( mesh !== undefined ) { 
